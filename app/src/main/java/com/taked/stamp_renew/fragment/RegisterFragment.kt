@@ -7,15 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.taked.stamp_renew.databinding.RegisterFragmentBinding
+import com.taked.stamp_renew.viewmodel.RegisterViewModel
 import com.taked.stamp_renew.viewmodel.TitleViewModel
 
 class RegisterFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = RegisterFragment()
-    }
-
-    private val viewModel = TitleViewModel()
+    private val viewModel = RegisterViewModel()
     private lateinit var binding: RegisterFragmentBinding
 
     override fun onCreateView(
