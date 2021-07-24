@@ -80,7 +80,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[0]}" />
+                                    android:text="@{viewmodel.judgeInfo[0] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
 
@@ -112,7 +112,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[1]}" />
+                                    android:text="@{viewmodel.judgeInfo[1] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
                     </TableRow>
@@ -150,7 +150,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[2]}" />
+                                    android:text="@{viewmodel.judgeInfo[2] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
 
@@ -183,7 +183,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[3]}" />
+                                    android:text="@{viewmodel.judgeInfo[3] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
                     </TableRow>
@@ -221,7 +221,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[4]}" />
+                                    android:text="@{viewmodel.judgeInfo[4] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
 
@@ -254,7 +254,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.stateInfo[5]}" />
+                                    android:text="@{viewmodel.judgeInfo[5] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
                             </LinearLayout>
                         </FrameLayout>
                     </TableRow>
