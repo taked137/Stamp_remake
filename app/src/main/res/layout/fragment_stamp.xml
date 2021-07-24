@@ -2,8 +2,6 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:id="@+id/container">
 
     <data>
@@ -12,52 +10,263 @@
 
         <variable
             name="viewmodel"
-            type="com.taked.stamp_renew.viewmodel.TitleViewModel" />
+            type="com.taked.stamp_renew.viewmodel.main.StampViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="@{viewmodel.titleText}"
+            android:textSize="20sp" />
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/lisence"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp">
+
+                <ImageView
+                    android:id="@+id/illust"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/illust" />
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[0] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_11"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(0)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '1'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[0]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[1] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_12"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(1)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '2'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[1]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[2] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_21"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(2)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '3'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[2]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[3] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_22"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(3)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '4'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[3]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[4] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_31"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(4)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '5'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[4]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="@{viewmodel.clearInfo[5] ? View.INVISIBLE : View.VISIBLE}">
+
+                            <ImageView
+                                android:id="@+id/button_32"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/floatbutton"
+                                android:onClick="@{() -> viewmodel.onClick(5)}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.buttonText + '6'}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{viewmodel.stateInfo[5]}" />
+                            </LinearLayout>
+                        </FrameLayout>
+                    </TableRow>
+                </TableLayout>
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/frame"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewmodel.licenseText}"
-                android:textSize="25dp"
-                tools:text="title" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="200dp"
-                android:text="@{viewmodel.titleText}"
-                android:textSize="40dp"
-                tools:text="title" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.buttonText}"
-                tools:text="tap to start" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/pictureframe" />
+        </FrameLayout>
+    </LinearLayout>
 </layout>

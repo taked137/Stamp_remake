@@ -1,4 +1,4 @@
-package com.taked.stamp_renew.ui.activity
+package com.taked.stamp_renew.model
 
 enum class ActivityState (val value: Int) {
     REGISTER(1),

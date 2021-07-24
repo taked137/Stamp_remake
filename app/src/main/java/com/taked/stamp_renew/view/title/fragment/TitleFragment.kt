@@ -1,4 +1,4 @@
-package com.taked.stamp_renew.ui.fragment
+package com.taked.stamp_renew.view.title.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.FragmentTitleBinding
-import com.taked.stamp_renew.ui.activity.ActivityState
-import com.taked.stamp_renew.ui.activity.TitleActivity
-import com.taked.stamp_renew.viewmodel.TitleViewModel
+import com.taked.stamp_renew.model.ActivityState
+import com.taked.stamp_renew.viewmodel.title.TitleViewModel
 
 class TitleFragment : Fragment() {
 

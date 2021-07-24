@@ -1,4 +1,4 @@
-package com.taked.stamp_renew.ui.fragment
+package com.taked.stamp_renew.view.main.fragment
 
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -9,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.taked.stamp_renew.databinding.FragmentInfoBinding
-import com.taked.stamp_renew.databinding.FragmentRegisterBinding
-import com.taked.stamp_renew.ui.activity.MainActivity
-import com.taked.stamp_renew.viewmodel.RegisterViewModel
+import com.taked.stamp_renew.view.main.activity.MainActivity
+import com.taked.stamp_renew.viewmodel.title.RegisterViewModel
 
-class ScheduleFragment : Fragment() {
+class InfoFragment : Fragment() {
 
     private val viewModel = RegisterViewModel()
     private lateinit var binding: FragmentInfoBinding

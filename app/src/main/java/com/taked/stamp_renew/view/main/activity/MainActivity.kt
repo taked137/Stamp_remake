@@ -1,10 +1,9 @@
-package com.taked.stamp_renew.ui.activity
+package com.taked.stamp_renew.view.main.activity
 
 import android.os.Bundle
 import com.taked.stamp_renew.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.taked.stamp_renew.databinding.ActivityMainBinding

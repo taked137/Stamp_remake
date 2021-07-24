@@ -1,10 +1,12 @@
-package com.taked.stamp_renew.ui.activity
+package com.taked.stamp_renew.view.title.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.taked.stamp_renew.R
-import com.taked.stamp_renew.ui.fragment.TitleFragment
+import com.taked.stamp_renew.model.ActivityState
+import com.taked.stamp_renew.view.main.activity.MainActivity
+import com.taked.stamp_renew.view.title.fragment.TitleFragment
 
 class TitleActivity : AppCompatActivity() {
 
