@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.TitleFragmentBinding
+import com.taked.stamp_renew.ui.activity.ActivityState
+import com.taked.stamp_renew.ui.activity.TitleActivity
 import com.taked.stamp_renew.viewmodel.TitleViewModel
 
 class TitleFragment : Fragment() {
@@ -29,6 +32,10 @@ class TitleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.button.setOnClickListener {
+            val dataStore = requireActivity().getSharedPreferences("DataStore", AppCompatActivity.MODE_PRIVATE)
+            val editor = dataStore.edit()
+            editor.putInt("state", ActivityState.GAME.value)
+            editor.apply()
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.container, RegisterFragment())
                 .addToBackStack(null).commit()
