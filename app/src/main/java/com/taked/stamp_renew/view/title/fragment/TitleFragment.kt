@@ -10,6 +10,7 @@ import androidx.core.content.edit
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.FragmentTitleBinding
 import com.taked.stamp_renew.model.ActivityState
+import com.taked.stamp_renew.view.main.StateKeys
 import com.taked.stamp_renew.viewmodel.title.TitleViewModel
 
 class TitleFragment : Fragment() {
@@ -35,7 +36,7 @@ class TitleFragment : Fragment() {
             requireActivity().apply {
                 getSharedPreferences("DataStore", AppCompatActivity.MODE_PRIVATE)
                     .edit {
-                        putInt("state", ActivityState.GAME.value)
+                        putInt(StateKeys.PROGRESS.key, ActivityState.GAME.value)
                     }
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, RegisterFragment())

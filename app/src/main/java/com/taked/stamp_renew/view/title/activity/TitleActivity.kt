@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.model.ActivityState
+import com.taked.stamp_renew.view.main.StateKeys
 import com.taked.stamp_renew.view.main.activity.MainActivity
 import com.taked.stamp_renew.view.title.fragment.TitleFragment
 
@@ -12,7 +13,7 @@ class TitleActivity : AppCompatActivity() {
 
     private fun getState(): ActivityState {
         val dataStore = getSharedPreferences("DataStore", MODE_PRIVATE)
-        return when (dataStore.getInt("state", -1)) {
+        return when (dataStore.getInt(StateKeys.PROGRESS.key, -1)) {
             ActivityState.GAME.value -> ActivityState.GAME
             ActivityState.CLEAR.value -> ActivityState.CLEAR
             else -> ActivityState.REGISTER
