@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
 import com.taked.stamp_renew.databinding.FragmentStampBinding
 import com.taked.stamp_renew.model.ActivityState
 import com.taked.stamp_renew.viewmodel.main.StampViewModel
@@ -40,40 +42,20 @@ class StampFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.apply {
-            judgeInfo.observe(viewLifecycleOwner, { _ ->
-                val dataStore =
-                    requireActivity().getSharedPreferences(
-                        "DataStore",
-                        AppCompatActivity.MODE_PRIVATE
-                    )
-                val editor = dataStore.edit()
-                for ((count, bool) in viewModel.judgeInfo.value!!.withIndex()) {
-                    editor.putBoolean("judge$count", bool)
+        observeState(viewModel.judgeInfo, "judge")
+        observeState(viewModel.clearInfo, "clear")
+    }
+
+    private fun observeState(array: LiveData<Array<Boolean>>, key: String) {
+        array.observe(viewLifecycleOwner, { _ ->
+            requireActivity().getSharedPreferences(
+                "DataStore", AppCompatActivity.MODE_PRIVATE
+            ).edit {
+                for ((count, bool) in array.value!!.withIndex()) {
+                    putBoolean("$key$count", bool)
                 }
-                editor.apply()
-            })
-            clearInfo.observe(viewLifecycleOwner, { _ ->
-                val dataStore =
-                    requireActivity().getSharedPreferences(
-                        "DataStore",
-                        AppCompatActivity.MODE_PRIVATE
-                    )
-                val editor = dataStore.edit()
-                for ((count, bool) in viewModel.clearInfo.value!!.withIndex()) {
-                    editor.putBoolean("clear$count", bool)
-                }
-                editor.apply()
-            })
-        }
-//
-//        binding.inputText.addTextChangedListener { text ->
-//            val isInvalid = text.isNullOrBlank() || text.length < 4
-//            viewModel.run {
-//                updateButton(isInvalid)
-//                updateText(isInvalid)
-//            }
-//        }
+            }
+        })
     }
 
 }
