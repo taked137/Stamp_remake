@@ -1,4 +1,4 @@
-package com.taked.stamp_renew.fragment
+package com.taked.stamp_renew.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

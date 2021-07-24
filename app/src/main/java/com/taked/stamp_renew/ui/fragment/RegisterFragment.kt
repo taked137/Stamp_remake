@@ -1,14 +1,17 @@
-package com.taked.stamp_renew.fragment
+package com.taked.stamp_renew.ui.fragment
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.RegisterFragmentBinding
+import com.taked.stamp_renew.ui.activity.MainActivity
 import com.taked.stamp_renew.viewmodel.RegisterViewModel
-import com.taked.stamp_renew.viewmodel.TitleViewModel
 
 class RegisterFragment : Fragment() {
 
@@ -33,13 +36,22 @@ class RegisterFragment : Fragment() {
             binding.button.isEnabled = isEnabled
         })
 
-        binding.inputText.addTextChangedListener { text ->
-            val isInvalid = text.isNullOrBlank() || text.length < 4
-            viewModel.run {
-                updateButton(isInvalid)
-                updateText(isInvalid)
+        binding.apply {
+            inputText.addTextChangedListener { text ->
+                val isInvalid = text.isNullOrBlank() || text.length < 4
+                viewModel.run {
+                    updateButton(isInvalid)
+                    updateText(isInvalid)
+                }
+            }
+            button.setOnClickListener {
+                val intent = Intent(requireActivity(), MainActivity::class.java).apply {
+                    addFlags(FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(intent)
             }
         }
+
     }
 
 }
