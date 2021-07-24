@@ -1,8 +1,8 @@
 package com.taked.stamp_renew.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.ui.fragment.TitleFragment
 
@@ -21,9 +21,10 @@ class TitleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         if (getState() != ActivityState.REGISTER) {
-            setContentView(R.layout.main_activity)
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         } else {
-            setContentView(R.layout.title_activity)
+            setContentView(R.layout.activity_title)
             if (savedInstanceState == null) {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, TitleFragment())

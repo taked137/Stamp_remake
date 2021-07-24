@@ -7,22 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.taked.stamp_renew.R
+import com.taked.stamp_renew.databinding.FragmentStampBinding
 import com.taked.stamp_renew.databinding.FragmentTitleBinding
 import com.taked.stamp_renew.ui.activity.ActivityState
 import com.taked.stamp_renew.ui.activity.TitleActivity
 import com.taked.stamp_renew.viewmodel.TitleViewModel
 
-class TitleFragment : Fragment() {
+class StampFragment : Fragment() {
 
     private val viewModel = TitleViewModel()
-    private lateinit var binding: FragmentTitleBinding
+    private lateinit var binding: FragmentStampBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTitleBinding.inflate(inflater, container, false).apply {
+        binding = FragmentStampBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
+
         }
 
         return binding.root
