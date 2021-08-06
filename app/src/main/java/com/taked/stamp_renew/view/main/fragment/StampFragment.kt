@@ -16,15 +16,24 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.lifecycleScope
 import com.squareup.moshi.Moshi
 import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.CustomDialogBinding
 import com.taked.stamp_renew.databinding.FragmentStampBinding
 import com.taked.stamp_renew.model.ActivityState
+import com.taked.stamp_renew.model.api.APIClient
+import com.taked.stamp_renew.model.api.APIController
+import com.taked.stamp_renew.model.api.ImageRequest
+import com.taked.stamp_renew.model.api.ImageResponse
 import com.taked.stamp_renew.view.main.StateData
 import com.taked.stamp_renew.view.main.StateKeys
 import com.taked.stamp_renew.view.util.AlertUtil
 import com.taked.stamp_renew.viewmodel.main.StampViewModel
+import kotlinx.coroutines.launch
+import javax.security.auth.callback.Callback
+import retrofit2.Call
+import retrofit2.*
 
 class StampFragment : Fragment() {
 
@@ -65,6 +74,12 @@ class StampFragment : Fragment() {
         observeState(viewModel.judgeInfo, StateKeys.POSITION, container)
         observeState(viewModel.clearInfo, StateKeys.QUIZ, container)
 
+
+        lifecycleScope.launch {
+            val a = APIController.requestQuiz(1, listOf(1, 2, 3))
+            Log.e("hello", a.toString())
+        }
+
         return binding.root
     }
 
@@ -73,7 +88,7 @@ class StampFragment : Fragment() {
     ) {
         array.observe(viewLifecycleOwner, {
             AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)
-            
+
             val clearArray = MutableList(6) { false }
             for ((count, bool) in array.value!!.withIndex()) {
                 clearArray[count] = bool
