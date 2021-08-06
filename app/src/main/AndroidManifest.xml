@@ -18,7 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.taked.stamp_renew.view.main.activity.MainActivity">
+        <activity android:name=".view.main.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.main.activity.QuizActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

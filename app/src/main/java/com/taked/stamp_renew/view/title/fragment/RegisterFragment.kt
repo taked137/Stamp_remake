@@ -48,6 +48,7 @@ class RegisterFragment : Fragment() {
                     addFlags(FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
                 startActivity(intent)
+                requireActivity().finish()
             }
         }
 

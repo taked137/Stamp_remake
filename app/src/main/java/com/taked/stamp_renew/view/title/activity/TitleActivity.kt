@@ -26,6 +26,7 @@ class TitleActivity : AppCompatActivity() {
         if (getState() != ActivityState.REGISTER) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         } else {
             setContentView(R.layout.activity_title)
             if (savedInstanceState == null) {
