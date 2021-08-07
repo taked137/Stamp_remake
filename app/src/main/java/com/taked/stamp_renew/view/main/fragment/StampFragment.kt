@@ -51,12 +51,10 @@ class StampFragment : Fragment() {
         observeState(viewModel.clearInfo, StateKeys.QUIZ)
         viewModel.apply {
             quizLiveData.observe(viewLifecycleOwner, {
-                val intent = Intent(requireActivity(), QuizActivity::class.java)
+                val intent = Intent(requireActivity(), QuizActivity::class.java).apply {
+                    putExtra("quizID", it)
+                }
                 startActivity(intent)
-
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.container, QuizFragment())
-//                    .addToBackStack(null).commit()
             })
             imageLiveData.observe(viewLifecycleOwner, {
                 if (AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)) {
