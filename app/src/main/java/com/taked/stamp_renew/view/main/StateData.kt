@@ -6,8 +6,8 @@ data class StateData(
     var hasCleared: Collection<Boolean>,
 )
 
-enum class StateKeys (val key: String) {
-    PROGRESS("progress"),
-    POSITION("position"),
-    QUIZ("quiz"),
+enum class ActivityState (val value: Int) {
+    REGISTER(1),
+    GAME(2),
+    CLEAR(3),
 }

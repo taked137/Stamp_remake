@@ -4,16 +4,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.taked.stamp_renew.R
-import com.taked.stamp_renew.model.ActivityState
-import com.taked.stamp_renew.view.main.StateKeys
+import com.taked.stamp_renew.view.main.ActivityState
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
 import com.taked.stamp_renew.view.main.activity.MainActivity
 import com.taked.stamp_renew.view.title.fragment.TitleFragment
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil
 
 class TitleActivity : AppCompatActivity() {
 
     private fun getState(): ActivityState {
-        val dataStore = getSharedPreferences("DataStore", MODE_PRIVATE)
-        return when (dataStore.getInt(StateKeys.PROGRESS.key, -1)) {
+        return when (SharedPreferenceUtil.getInt(this, SharedPreferenceKey.PROGRESS, -1)) {
             ActivityState.GAME.value -> ActivityState.GAME
             ActivityState.CLEAR.value -> ActivityState.CLEAR
             else -> ActivityState.REGISTER

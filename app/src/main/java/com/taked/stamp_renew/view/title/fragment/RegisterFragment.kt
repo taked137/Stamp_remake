@@ -9,8 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.taked.stamp_renew.databinding.FragmentRegisterBinding
+import com.taked.stamp_renew.view.main.ActivityState
+import com.taked.stamp_renew.viewmodel.util.APIController
 import com.taked.stamp_renew.view.main.activity.MainActivity
 import com.taked.stamp_renew.viewmodel.title.RegisterViewModel
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
+import kotlinx.coroutines.runBlocking
 
 class RegisterFragment : Fragment() {
 
@@ -23,19 +28,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
-        }
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel.isButtonEnabled.observe(viewLifecycleOwner, { isEnabled ->
-            binding.button.isEnabled = isEnabled
-        })
-
-        binding.apply {
             inputText.addTextChangedListener { text ->
                 val isInvalid = text.isNullOrBlank() || text.length < 4
                 viewModel.run {
@@ -43,7 +36,18 @@ class RegisterFragment : Fragment() {
                     updateText(isInvalid)
                 }
             }
+
             button.setOnClickListener {
+                val name = inputText.text.toString()
+                val device = "${android.os.Build.DEVICE} ${android.os.Build.MODEL}"
+                val version = "Android ${android.os.Build.VERSION.RELEASE}"
+
+                val uuid = getUUID(name, device, version) ?: return@setOnClickListener
+                SharedPreferenceUtil.putInt(
+                    requireActivity(), SharedPreferenceKey.PROGRESS, ActivityState.GAME.value
+                )
+                SharedPreferenceUtil.putString(requireActivity(), SharedPreferenceKey.UUID, uuid)
+
                 val intent = Intent(requireActivity(), MainActivity::class.java).apply {
                     addFlags(FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 }
@@ -52,6 +56,16 @@ class RegisterFragment : Fragment() {
             }
         }
 
+        viewModel.isButtonEnabled.observe(viewLifecycleOwner, { isEnabled ->
+            binding.button.isEnabled = isEnabled
+        })
+
+        return binding.root
+
     }
 
+    private fun getUUID(name: String, device: String, version: String) =
+        runBlocking {
+            APIController.registerUser(name, device, version)?.uuid
+        }
 }

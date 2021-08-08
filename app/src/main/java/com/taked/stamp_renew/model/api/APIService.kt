@@ -10,6 +10,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface APIService {
+    @POST("user/create")
+    suspend fun register(@Body request: UserRequest): UserResponse
+
     @POST("stamp/image")
     suspend fun image(@Body request: ImageRequest): ImageResponse
 }

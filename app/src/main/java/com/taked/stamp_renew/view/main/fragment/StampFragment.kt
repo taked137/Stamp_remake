@@ -6,23 +6,20 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
 import com.squareup.moshi.Moshi
-import com.taked.stamp_renew.R
 import com.taked.stamp_renew.databinding.FragmentStampBinding
-import com.taked.stamp_renew.model.api.APIController
+import com.taked.stamp_renew.viewmodel.util.APIController
 import com.taked.stamp_renew.view.main.StateData
-import com.taked.stamp_renew.view.main.StateKeys
 import com.taked.stamp_renew.view.main.activity.QuizActivity
-import com.taked.stamp_renew.view.title.fragment.RegisterFragment
-import com.taked.stamp_renew.view.util.AlertUtil
+import com.taked.stamp_renew.viewmodel.util.AlertUtil
 import com.taked.stamp_renew.viewmodel.main.StampViewModel
-import kotlinx.coroutines.launch
+import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.runBlocking
 
 class StampFragment : Fragment() {
@@ -34,11 +31,8 @@ class StampFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val dataStore =
-            requireActivity().getSharedPreferences("DataStore", AppCompatActivity.MODE_PRIVATE)
-
-        val positionList = getStateList(dataStore, StateKeys.POSITION)
-        val quizList = getStateList(dataStore, StateKeys.QUIZ)
+        val positionList = getStateList(SharedPreferenceKey.POSITION)
+        val quizList = getStateList(SharedPreferenceKey.QUIZ)
 
         viewModel = StampViewModel(positionList, quizList)
 
@@ -47,8 +41,8 @@ class StampFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        observeState(viewModel.judgeInfo, StateKeys.POSITION)
-        observeState(viewModel.clearInfo, StateKeys.QUIZ)
+        observeState(viewModel.judgeInfo, SharedPreferenceKey.POSITION)
+        observeState(viewModel.clearInfo, SharedPreferenceKey.QUIZ)
         viewModel.apply {
             quizLiveData.observe(viewLifecycleOwner, {
                 val intent = Intent(requireActivity(), QuizActivity::class.java).apply {
@@ -68,33 +62,28 @@ class StampFragment : Fragment() {
             })
         }
 
-//        lifecycleScope.launch {
-//            val a = APIController.requestQuiz(1, listOf(1, 2, 3))
-//            Log.e("hello", a.toString())
-//        }
         return binding.root
     }
 
-    private fun observeState(array: LiveData<List<Boolean>>, stateKey: StateKeys) {
+    private fun observeState(
+        array: LiveData<List<Boolean>>, sharedPreferenceKey: SharedPreferenceKey
+    ) {
         array.observe(viewLifecycleOwner, {
             val clearArray = MutableList(6) { false }
             for ((count, bool) in array.value!!.withIndex()) {
                 clearArray[count] = bool
             }
 
-            requireActivity().getSharedPreferences(
-                "DataStore", AppCompatActivity.MODE_PRIVATE
-            ).edit {
-                putString(stateKey.key, adapter.toJson(StateData(clearArray)))
-            }
+            SharedPreferenceUtil.putString(
+                requireActivity(), sharedPreferenceKey, adapter.toJson(StateData(clearArray))
+            )
         })
     }
 
-    private fun getStateList(dataStore: SharedPreferences, state: StateKeys) =
+    private fun getStateList(sharedPreferenceKey: SharedPreferenceKey) =
         try {
-            adapter.fromJson(
-                dataStore.getString(state.key, "")!!
-            )!!.hasCleared.toMutableList()
+            val data = SharedPreferenceUtil.getString(requireActivity(), sharedPreferenceKey, "")
+            adapter.fromJson(data!!)!!.hasCleared.toMutableList()
         } catch (e: Exception) {
             MutableList(6) { false }
         }
