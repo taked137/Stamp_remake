@@ -1,6 +1,7 @@
 package com.taked.stamp_renew.view.main.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,9 @@ class QuizFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        viewModel = QuizViewModel(requireActivity().intent.getIntExtra("quizID", -1)).apply {
+        val quizID = requireActivity().intent.getIntExtra("quizID", -1)
+
+        viewModel = QuizViewModel(quizID).apply {
             backLiveData.observe(viewLifecycleOwner, {
                 requireActivity().finish()
             })
@@ -39,7 +42,7 @@ class QuizFragment : Fragment() {
             }
 
             lifecycleScope.launch {
-                val response = APIController.requestQuiz(1, listOf(1, 2, 3))!!
+                val response = APIController.requestQuiz(quizID + 1)!!
                 quizImage.load(response.url)
             }
         }

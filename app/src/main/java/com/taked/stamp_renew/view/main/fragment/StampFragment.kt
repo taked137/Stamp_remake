@@ -51,13 +51,32 @@ class StampFragment : Fragment() {
                 startActivity(intent)
             })
             imageLiveData.observe(viewLifecycleOwner, {
-                if (AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)) {
+                if (!AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)) {
+                    return@observe
+                }
+
+                val response =
                     runBlocking {
-                        val a = APIController.requestQuiz(1, listOf(1, 2, 3))
-                        Log.e("hello", a.toString())
+                        APIController.judgeBeacon(1, listOf(1, 2, 3))
                     }
-                    Log.e("hello", "hello")
-                    updateJudgeInfo(it)
+
+                when (response!!.id) {
+                    // 範囲外
+                    0 -> AlertUtil.showNotifyDialog(
+                        requireActivity(), title = "取得結果", message = "範囲外です。"
+                    )
+                    // 範囲付近
+                    1 -> AlertUtil.showNotifyDialog(
+                        requireActivity(), title = "取得結果", message = "範囲付近です。もう少し近づいてください。"
+                    )
+                    // 範囲内
+                    2 -> {
+                        AlertUtil.showNotifyDialog(
+                            requireActivity(), title = "取得結果", message = "範囲内です。問題を表示します。",
+                            callback = { this.onClick(it) }
+                        )
+                        updateJudgeInfo(it)
+                    }
                 }
             })
         }

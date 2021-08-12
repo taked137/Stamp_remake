@@ -8,13 +8,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface APIService {
     @POST("user/create")
     suspend fun register(@Body request: UserRequest): UserResponse
 
-    @POST("stamp/image")
-    suspend fun image(@Body request: ImageRequest): ImageResponse
+    @POST("stamp/beacon")
+    suspend fun beacon(@Body request: BeaconRequest): BeaconResponse
+
+    @GET("stamp/image/{num}")
+    suspend fun image(@Path("num") ID: Int): ImageResponse
 }
 
 class APIClient {
