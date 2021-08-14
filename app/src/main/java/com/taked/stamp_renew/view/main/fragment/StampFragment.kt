@@ -1,5 +1,7 @@
 package com.taked.stamp_renew.view.main.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -9,6 +11,8 @@ import android.view.LayoutInflater
 import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.lifecycle.LiveData
@@ -24,9 +28,29 @@ import kotlinx.coroutines.runBlocking
 
 class StampFragment : Fragment() {
 
+    private lateinit var uuid: String
     private lateinit var viewModel: StampViewModel
     private lateinit var binding: FragmentStampBinding
+
     private val adapter = Moshi.Builder().build().adapter(StateData::class.java)
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult? ->
+            if (result?.resultCode != Activity.RESULT_OK) {
+                return@registerForActivityResult
+            }
+            result.data?.let { data: Intent ->
+                val quizID = data.getIntExtra("correctNum", -1)
+                if (0 < quizID) {
+                    viewModel.updateClearInfo(quizID)
+                }
+            }
+        }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        uuid =
+            SharedPreferenceUtil.getString(requireActivity(), SharedPreferenceKey.UUID, "")!!
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -35,7 +59,6 @@ class StampFragment : Fragment() {
         val quizList = getStateList(SharedPreferenceKey.QUIZ)
 
         viewModel = StampViewModel(positionList, quizList)
-
         binding = FragmentStampBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
@@ -43,12 +66,13 @@ class StampFragment : Fragment() {
 
         observeState(viewModel.judgeInfo, SharedPreferenceKey.POSITION)
         observeState(viewModel.clearInfo, SharedPreferenceKey.QUIZ)
+
         viewModel.apply {
             quizLiveData.observe(viewLifecycleOwner, {
                 val intent = Intent(requireActivity(), QuizActivity::class.java).apply {
                     putExtra("quizID", it)
                 }
-                startActivity(intent)
+                startForResult.launch(intent)
             })
             imageLiveData.observe(viewLifecycleOwner, {
                 if (!AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)) {
@@ -57,10 +81,17 @@ class StampFragment : Fragment() {
 
                 val response =
                     runBlocking {
-                        APIController.judgeBeacon(1, listOf(1, 2, 3))
+                        APIController.judgeBeacon(uuid, 1, listOf(1, 2, 3))
                     }
 
-                when (response!!.id) {
+                if (response == null) {
+                    AlertUtil.showNotifyDialog(
+                        requireActivity(), title = "通信結果", message = "通信エラーが発生しました。もう一度試してみてください。"
+                    )
+                    return@observe
+                }
+
+                when (response.id) {
                     // 範囲外
                     0 -> AlertUtil.showNotifyDialog(
                         requireActivity(), title = "取得結果", message = "範囲外です。"

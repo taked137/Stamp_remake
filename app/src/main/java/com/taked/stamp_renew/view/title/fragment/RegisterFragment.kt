@@ -66,6 +66,6 @@ class RegisterFragment : Fragment() {
 
     private fun getUUID(name: String, device: String, version: String) =
         runBlocking {
-            APIController.registerUser(name, device, version)?.uuid
+            APIController.registerUser(name, device, version)!!.uuid
         }
 }

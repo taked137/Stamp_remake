@@ -12,13 +12,13 @@ import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil
 
 class TitleActivity : AppCompatActivity() {
 
-    private fun getState(): ActivityState {
-        return when (SharedPreferenceUtil.getInt(this, SharedPreferenceKey.PROGRESS, -1)) {
+    private fun getState(): ActivityState =
+        when (SharedPreferenceUtil.getInt(this, SharedPreferenceKey.PROGRESS, -1)) {
             ActivityState.GAME.value -> ActivityState.GAME
             ActivityState.CLEAR.value -> ActivityState.CLEAR
             else -> ActivityState.REGISTER
         }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

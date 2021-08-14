@@ -7,18 +7,12 @@ import androidx.lifecycle.ViewModel
 class QuizViewModel(private val quizID: Int) : ViewModel() {
     companion object {
         const val TEXT_TITLE = "謎解き"
-        const val TEXT_BACK = "←戻る"
         const val TEXT_BUTTON = "解答送信"
         const val TEXT_INPUT = "解答を入力してください"
     }
 
     val titleText: String
         get() = TEXT_TITLE + (quizID + 1)
-
-    val backLiveData = MutableLiveData<String>()
-    fun onTextTouch() {
-        backLiveData.value = "Clicked"
-    }
 
     private val _isButtonEnabled: MutableLiveData<Boolean> =
         MutableLiveData<Boolean>().also { mutableLiveData ->

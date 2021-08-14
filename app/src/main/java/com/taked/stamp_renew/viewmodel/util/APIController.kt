@@ -15,22 +15,32 @@ class APIController {
             }
         }
 
-        suspend fun judgeBeacon(quizNum: Int, beacons: List<Int>): BeaconResponse? {
+        suspend fun judgeBeacon(uuid: String, quizNum: Int, beacons: List<Int>): BeaconResponse? {
             val request = BeaconRequest(quizNum, beacons)
 
             return try {
-                APIClient.instance.beacon(request)
+                APIClient.instance.beacon(uuid, request)
             } catch (e: Exception) {
                 null
             }
         }
 
-        suspend fun requestQuiz(quizNum: Int): ImageResponse? =
+        suspend fun requestQuiz(uuid: String, quizNum: Int): ImageResponse? =
             try {
-                APIClient.instance.image(quizNum)
+                APIClient.instance.image(uuid, quizNum + 1)
             } catch (e: Exception) {
                 null
             }
+
+        suspend fun judgeAnswer(uuid: String, quizNum: Int, answer: String): AnswerResponse? {
+            val request = AnswerRequest(quizNum + 1, answer)
+
+            return try {
+                APIClient.instance.judge(uuid, request)
+            } catch (e: Exception) {
+                null
+            }
+        }
 
     }
 }

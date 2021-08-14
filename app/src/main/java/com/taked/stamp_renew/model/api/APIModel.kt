@@ -11,7 +11,7 @@ data class UserResponse (
 
 data class BeaconRequest(
     val quiz: Int,
-    val beacon: Collection<Int>
+    val beacon: Collection<Int>,
 )
 data class BeaconResponse(
     val id: Int,
@@ -20,5 +20,14 @@ data class BeaconResponse(
 )
 
 data class ImageResponse(
-    val url: String
+    val url: String,
+)
+
+data class AnswerRequest(
+    val quiz: Int,
+    val answer: String,
+)
+data class AnswerResponse(
+    val quiz: Int,
+    val correct: Boolean,
 )
