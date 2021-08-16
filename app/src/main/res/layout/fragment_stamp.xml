@@ -39,6 +39,7 @@
                     android:id="@+id/illust"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="@{() -> viewmodel.onGoalClick()}"
                     android:scaleType="fitXY"
                     app:srcCompat="@drawable/illust" />
 
@@ -63,7 +64,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(0)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(0)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -95,7 +96,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(1)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(1)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -133,7 +134,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(2)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(2)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -166,7 +167,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(3)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(3)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -204,7 +205,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(4)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(4)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -237,7 +238,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/floatbutton"
-                                android:onClick="@{() -> viewmodel.onClick(5)}" />
+                                android:onClick="@{() -> viewmodel.onQuizClick(5)}" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"

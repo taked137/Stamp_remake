@@ -42,7 +42,7 @@ class RegisterFragment : Fragment() {
                 val device = "${android.os.Build.DEVICE} ${android.os.Build.MODEL}"
                 val version = "Android ${android.os.Build.VERSION.RELEASE}"
 
-                val uuid = getUUID(name, device, version) ?: return@setOnClickListener
+                val uuid = getUUID(name, device, version)
                 SharedPreferenceUtil.putInt(
                     requireActivity(), SharedPreferenceKey.PROGRESS, ActivityState.GAME.value
                 )

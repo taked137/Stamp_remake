@@ -31,3 +31,7 @@ data class AnswerResponse(
     val quiz: Int,
     val correct: Boolean,
 )
+
+data class GoalResponse(
+    val accept: Boolean,
+)

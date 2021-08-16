@@ -42,5 +42,11 @@ class APIController {
             }
         }
 
+        suspend fun postGoal(uuid: String): GoalResponse? =
+            try {
+                APIClient.instance.goal(uuid)
+            } catch (e: Exception) {
+                null
+            }
     }
 }

@@ -19,6 +19,9 @@ interface APIService {
 
     @POST("stamp/judge")
     suspend fun judge(@Header("uuid") uuid: String, @Body request: AnswerRequest): AnswerResponse
+
+    @POST("user/goal")
+    suspend fun goal(@Header("uuid") uuid: String): GoalResponse
 }
 
 class APIClient {

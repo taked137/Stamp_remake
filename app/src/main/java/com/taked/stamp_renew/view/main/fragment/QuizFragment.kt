@@ -13,6 +13,7 @@ import coil.load
 import com.taked.stamp_renew.databinding.FragmentQuizBinding
 import com.taked.stamp_renew.viewmodel.util.APIController
 import com.taked.stamp_renew.viewmodel.main.QuizViewModel
+import com.taked.stamp_renew.viewmodel.util.AlertUtil
 import com.taked.stamp_renew.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -47,16 +48,19 @@ class QuizFragment(private val quizID: Int) : Fragment() {
                     APIController.judgeAnswer(uuid, quizID, inputText.text.toString())
                 }?.let {
                     if (!it.correct) {
+                        AlertUtil.showNotifyDialog(requireActivity(), "解答結果", "不正解！もう一度考えてみてください。")
                         return@let
                     }
-                    requireActivity().apply {
-                        val intent = intent.apply {
-                            putExtra("correctNum", quizID)
-                        }
-                        setResult(Activity.RESULT_OK, intent)
-                        finish()
-                    }
 
+                    AlertUtil.showNotifyDialog(requireActivity(), "解答結果", "正解！スタンプを押します！") {
+                        requireActivity().apply {
+                            val intent = intent.apply {
+                                putExtra("correctNum", quizID)
+                            }
+                            setResult(Activity.RESULT_OK, intent)
+                            finish()
+                        }
+                    }
                 }
             }
 

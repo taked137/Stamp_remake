@@ -6,12 +6,18 @@ import org.junit.Assert
 import org.junit.Test
 
 class APIUnitTest {
+    val name = "banana"
+    val device = "apple"
+    val version = "kiwi"
+
+    val uuid = "uuid"
+    val quiz = 5
+    val beacon = arrayOf(1, 2, 3)
+
+    val answer = "はじっこ"
+
     @Test
     fun testRegister() {
-        val name = "banana"
-        val device = "apple"
-        val version = "kiwi"
-
         val response = runBlocking {
             APIController.registerUser(name, device, version)
         }
@@ -21,10 +27,6 @@ class APIUnitTest {
 
     @Test
     fun testBeacon() {
-        val uuid = "uuid"
-        val quiz = 1
-        val beacon = arrayOf(1, 2, 3)
-
         val response = runBlocking {
             APIController.judgeBeacon(uuid, quiz, beacon.toMutableList())
         }
@@ -34,9 +36,6 @@ class APIUnitTest {
 
     @Test
     fun testQuizImage() {
-        val uuid = "uuid"
-        val quiz = 1
-
         val response = runBlocking {
             APIController.requestQuiz(uuid, quiz)
         }
@@ -46,10 +45,6 @@ class APIUnitTest {
 
     @Test
     fun testJudgeAnswer() {
-        val uuid = "uuid"
-        val quiz = 5
-        val answer = "はじっこ"
-
         val correctResponse = runBlocking {
             APIController.judgeAnswer(uuid, quiz, answer)
         }
@@ -61,5 +56,14 @@ class APIUnitTest {
         }
 
         Assert.assertEquals(false, wrongResponse!!.correct)
+    }
+
+    @Test
+    fun testGoal() {
+        val correctResponse = runBlocking {
+            APIController.postGoal(uuid)
+        }
+
+        Assert.assertEquals(true, correctResponse!!.accept)
     }
 }
