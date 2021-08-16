@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/stamp">
+
+    <fragment
+        android:id="@+id/stamp"
+        android:name="com.taked.stamp_renew.view.main.fragment.StampFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_stamp" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.taked.stamp_renew.view.main.fragment.MapFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/info"
+        android:name="com.taked.stamp_renew.view.main.fragment.InfoFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/schedule"
+        android:name="com.taked.stamp_renew.view.main.fragment.ScheduleFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_schedule" />
+
+    <fragment
+        android:id="@+id/other"
+        android:name="com.taked.stamp_renew.view.main.fragment.OtherFragment"
+        android:label="fragment_first"
+        tools:layout="@layout/fragment_other" />
+
+</navigation>

@@ -1,9 +1,10 @@
-package com.taked.stamp_renew.viewmodel
+package com.taked.stamp_renew.viewmodel.title
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class RegisterViewModel {
+class RegisterViewModel : ViewModel() {
     companion object {
         const val TEXT_TITLE = "ユーザ登録"
         const val TEXT_INPUT = "ユーザ名を入力してください"

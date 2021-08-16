@@ -1,12 +1,10 @@
-package com.taked.stamp_renew.viewmodel
+package com.taked.stamp_renew.viewmodel.title
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import android.view.View
-import android.widget.Toast
+import androidx.lifecycle.ViewModel
 
-class TitleViewModel {
+class TitleViewModel : ViewModel() {
     companion object {
         const val TEXT_LICENSE = "ライセンス"
         const val TEXT_TITLE = "名工大\nスタンプラリー"

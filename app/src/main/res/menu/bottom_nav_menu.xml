@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/stamp"
+        android:icon="@drawable/stamp"
+        android:title="Stamp" />
+    <item
+        android:id="@+id/map"
+        android:icon="@drawable/map"
+        android:title="Map" />
+    <item
+        android:id="@+id/info"
+        android:icon="@drawable/info"
+        android:title="Info" />
+    <item
+        android:id="@+id/schedule"
+        android:icon="@drawable/schedule"
+        android:title="Schedule" />
+    <item
+        android:id="@+id/other"
+        android:icon="@drawable/other"
+        android:title="Other" />
+</menu>
