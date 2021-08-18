@@ -16,8 +16,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
         
       # Gradleの依存関係をキャッシュ/リストアしてビルド時間を短くする
       - name: Gradle Cache
@@ -27,12 +25,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+            
   build:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
       - name: Unit Test
