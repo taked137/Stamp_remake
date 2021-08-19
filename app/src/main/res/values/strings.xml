@@ -3,6 +3,7 @@
 
     <string name="image_quiz">image_quiz</string>
     <string name="image_base">image_base</string>
+    <string name="image_frame">frame</string>
 
     <string name="image_button11" tools:ignore="Typos">image_button11</string>
     <string name="image_button12" tools:ignore="Typos">image_button12</string>
