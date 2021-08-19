@@ -1,6 +1,6 @@
 package com.taked.stamp
 
-import com.taked.stamp.viewmodel.util.APIController
+import com.taked.stamp.model.api.APIController
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test

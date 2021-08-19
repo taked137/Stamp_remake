@@ -15,7 +15,7 @@ import androidx.lifecycle.LiveData
 import com.squareup.moshi.Moshi
 import com.taked.stamp.databinding.FragmentStampBinding
 import com.taked.stamp.view.main.ActivityState
-import com.taked.stamp.viewmodel.util.APIController
+import com.taked.stamp.model.api.APIController
 import com.taked.stamp.view.main.StateData
 import com.taked.stamp.view.main.activity.QuizActivity
 import com.taked.stamp.viewmodel.util.AlertUtil

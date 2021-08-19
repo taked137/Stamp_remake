@@ -1,4 +1,4 @@
-package com.taked.stamp.viewmodel.util
+package com.taked.stamp.model.api
 
 import com.taked.stamp.model.api.APIClient
 import com.taked.stamp.model.api.BeaconRequest

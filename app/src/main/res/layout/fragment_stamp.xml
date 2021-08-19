@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
 
     <data>
 
@@ -24,249 +25,258 @@
             android:layout_gravity="center_horizontal"
             android:padding="15dp"
             android:text="@{viewmodel.titleText}"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            tool:text="title" />
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <FrameLayout
+            <ImageView
+                android:id="@+id/illust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_base"
+                android:onClick="@{() -> viewmodel.onGoalClick()}"
+                android:padding="15dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/illust" />
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="15dp">
 
-                <ImageView
-                    android:id="@+id/illust"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/image_base"
-                    android:onClick="@{() -> viewmodel.onGoalClick()}"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/illust" />
-
-                <TableLayout
+                <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[0] ? View.INVISIBLE : View.VISIBLE}">
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                        <ImageView
+                            android:id="@+id/button_11"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button11"
+                            android:onClick="@{() -> viewmodel.onQuizClick(0)}" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[0] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_11"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button11"
-                                android:onClick="@{() -> viewmodel.onQuizClick(0)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '1'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[0] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '1'}" />
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[1] ? View.INVISIBLE : View.VISIBLE}">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[0] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
+                        <ImageView
+                            android:id="@+id/button_12"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button12"
+                            android:onClick="@{() -> viewmodel.onQuizClick(1)}" />
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[1] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_12"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button12"
-                                android:onClick="@{() -> viewmodel.onQuizClick(1)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '2'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[1] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </TableRow>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '2'}" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[1] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
-                    </TableRow>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[2] ? View.INVISIBLE : View.VISIBLE}">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                        <ImageView
+                            android:id="@+id/button_21"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button21"
+                            android:onClick="@{() -> viewmodel.onQuizClick(2)}" />
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[2] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_21"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button21"
-                                android:onClick="@{() -> viewmodel.onQuizClick(2)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '3'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '3'}" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[2] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[2] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
 
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[3] ? View.INVISIBLE : View.VISIBLE}">
+
+                        <ImageView
+                            android:id="@+id/button_22"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button22"
+                            android:onClick="@{() -> viewmodel.onQuizClick(3)}" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[3] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_22"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button22"
-                                android:onClick="@{() -> viewmodel.onQuizClick(3)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '4'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[3] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </TableRow>
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '4'}" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[3] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
-                    </TableRow>
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[4] ? View.INVISIBLE : View.VISIBLE}">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
+                        <ImageView
+                            android:id="@+id/button_31"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button31"
+                            android:onClick="@{() -> viewmodel.onQuizClick(4)}" />
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[4] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_31"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button31"
-                                android:onClick="@{() -> viewmodel.onQuizClick(4)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '5'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '5'}" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[4] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[4] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
 
 
-                        <FrameLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:visibility="@{viewmodel.clearInfo[5] ? View.INVISIBLE : View.VISIBLE}">
+
+                        <ImageView
+                            android:id="@+id/button_32"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/floatbutton"
+                            android:contentDescription="@string/image_button32"
+                            android:onClick="@{() -> viewmodel.onQuizClick(5)}" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:gravity="center"
-                            android:visibility="@{viewmodel.clearInfo[5] ? View.INVISIBLE : View.VISIBLE}">
+                            android:orientation="vertical">
 
-                            <ImageView
-                                android:id="@+id/button_32"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/floatbutton"
-                                android:contentDescription="@string/image_button32"
-                                android:onClick="@{() -> viewmodel.onQuizClick(5)}" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.buttonText + '6'}"
+                                android:textColor="@color/black" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.buttonText + '6'}" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{viewmodel.judgeInfo[5] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}" />
-                            </LinearLayout>
-                        </FrameLayout>
-                    </TableRow>
-                </TableLayout>
-            </FrameLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{viewmodel.judgeInfo[5] ? viewmodel.TEXT_VALID : viewmodel.TEXT_INVALID}"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </TableRow>
+            </TableLayout>
 
             <ImageView
                 android:id="@+id/frame"

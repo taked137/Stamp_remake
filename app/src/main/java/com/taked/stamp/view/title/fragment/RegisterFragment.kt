@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.taked.stamp.databinding.FragmentRegisterBinding
 import com.taked.stamp.view.main.ActivityState
-import com.taked.stamp.viewmodel.util.APIController
+import com.taked.stamp.model.api.APIController
 import com.taked.stamp.view.main.activity.MainActivity
 import com.taked.stamp.viewmodel.title.RegisterViewModel
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil

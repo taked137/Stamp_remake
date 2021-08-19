@@ -11,7 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.taked.stamp.databinding.FragmentQuizBinding
-import com.taked.stamp.viewmodel.util.APIController
+import com.taked.stamp.model.api.APIController
 import com.taked.stamp.viewmodel.main.QuizViewModel
 import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
