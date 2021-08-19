@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewmodel"
-            type="com.taked.stamp_renew.viewmodel.title.RegisterViewModel" />
+            type="com.taked.stamp.viewmodel.title.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

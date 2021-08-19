@@ -1,6 +1,33 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'io.gitlab.arturbosch.detekt' version '1.17.0'
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
+    config = files("$projectDir/config/detekt/detekt.yml")
+    baseline = file("$projectDir/config/detekt/baseline.xml")
+
+    reports {
+        xml {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/detekt.xml")
+        }
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/detekt.html")
+        }
+        txt {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/detekt.txt")
+        }
+        sarif {
+            enabled = true
+            destination = file("$buildDir/reports/detekt/detekt.sarif")
+        }
+    }
 }
 
 android {
@@ -28,8 +55,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = '11'
+        targetCompatibility = '11'
     }
     kotlinOptions {
         jvmTarget = '1.8'

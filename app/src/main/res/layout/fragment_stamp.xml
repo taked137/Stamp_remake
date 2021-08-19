@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.taked.stamp_renew.viewmodel.main.StampViewModel" />
+            type="com.taked.stamp.viewmodel.main.StampViewModel" />
     </data>
 
 

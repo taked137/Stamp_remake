@@ -10,7 +10,7 @@
 
         <variable
             name="viewmodel"
-            type="com.taked.stamp_renew.viewmodel.main.QuizViewModel" />
+            type="com.taked.stamp.viewmodel.main.QuizViewModel" />
     </data>
 
     <RelativeLayout
