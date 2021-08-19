@@ -1,11 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">stamp_renew</string>
+
     <string name="image_quiz">image_quiz</string>
     <string name="image_base">image_base</string>
+
     <string name="image_button11" tools:ignore="Typos">image_button11</string>
     <string name="image_button12" tools:ignore="Typos">image_button12</string>
     <string name="image_button21" tools:ignore="Typos">image_button21</string>
     <string name="image_button22" tools:ignore="Typos">image_button22</string>
     <string name="image_button31" tools:ignore="Typos">image_button31</string>
     <string name="image_button32" tools:ignore="Typos">image_button32</string>
+
+    <string name="title_stamp">Stamp</string>
+    <string name="title_map">Map</string>
+    <string name="title_info">Info</string>
+    <string name="title_schedule">Schedule</string>
+    <string name="title_other">Other</string>
 </resources>
