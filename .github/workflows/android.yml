@@ -103,7 +103,7 @@ jobs:
     # アーティファクトへアップロード
     - name: Upload results Artifact
       uses: actions/upload-artifact@v2
-      if: failure()
+      if: success() || failure()
       with:
         name: results
         path: |
