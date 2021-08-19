@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -13,41 +12,39 @@
             type="com.taked.stamp.viewmodel.main.QuizViewModel" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="100dp">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="100dp">
+        <ImageView
+            android:id="@+id/quizImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/image_quiz" />
 
-            <ImageView
-                android:id="@+id/quizImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+        <EditText
+            android:id="@+id/inputText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:autofillHints=""
+            android:hint="@{viewmodel.TEXT_INPUT}"
+            android:inputType="text"
+            tools:text="answer" />
 
-            <EditText
-                android:id="@+id/inputText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:hint="@{viewmodel.TEXT_INPUT}"
-                tools:text="answer" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:enabled="@{viewmodel.isButtonEnabled}"
+            android:text="@{viewmodel.TEXT_BUTTON}"
+            tools:text="tap to start" />
+    </LinearLayout>
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="@{viewmodel.TEXT_BUTTON}"
-                android:enabled="@{viewmodel.isButtonEnabled}"
-                tools:text="tap to start" />
-        </LinearLayout>
-
-    </RelativeLayout>
 </layout>

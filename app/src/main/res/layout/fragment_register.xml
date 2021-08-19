@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <variable
             name="viewmodel"
             type="com.taked.stamp.viewmodel.title.RegisterViewModel" />
@@ -52,7 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
+                android:autofillHints=""
                 android:hint="@{viewmodel.inputText}"
+                android:inputType="text"
                 tools:text="username" />
 
             <Button
