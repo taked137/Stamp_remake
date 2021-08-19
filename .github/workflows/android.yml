@@ -1,0 +1,112 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+        
+      # Gradleの依存関係をキャッシュ/リストアしてビルド時間を短くする
+      - name: Gradle Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+            
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      
+      # 依存関係の出力
+      - name: Displays the Android dependencies of the project
+        run: ./gradlew androidDependencies
+
+      # コンパイル
+      - name: Run Compile
+        run: ./gradlew assembleDebug
+            
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+        
+      # Gradleの依存関係をキャッシュ/リストアしてビルド時間を短くする
+      - name: Gradle Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+            
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+        
+      - name: Unit Test
+        run: ./gradlew test --stacktrace
+        
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    # チェックアウト
+    - uses: actions/checkout@v2
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # 静的解析
+    - name: Run Inspection
+      run: ./gradlew lint
+
+    # アーティファクトへアップロード
+    - name: Upload results Artifact
+      uses: actions/upload-artifact@v2
+      if: success() || failure()
+      with:
+        name: results
+        path: |
+          **/build/reports/lint-results-*.html
+          **/build/reports/lint-results-*.xml
+        if-no-files-found: error
+        retention-days: 14
+
+  detekt:
+    runs-on: ubuntu-latest
+    steps:
+    # チェックアウト
+    - uses: actions/checkout@v2
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    # 静的解析
+    - name: Lint with detekt
+      run: ./gradlew detekt
+
+    # アーティファクトへアップロード
+    - name: Upload results Artifact
+      uses: actions/upload-artifact@v2
+      if: failure()
+      with:
+        name: results
+        path: |
+          **/build/reports/detekt/**/*
+        if-no-files-found: error
+        retention-days: 14
