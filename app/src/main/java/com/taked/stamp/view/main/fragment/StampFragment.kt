@@ -6,12 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
+import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import com.squareup.moshi.Moshi
 import com.taked.stamp.databinding.FragmentStampBinding
 import com.taked.stamp.view.main.ActivityState
@@ -25,8 +27,6 @@ import kotlinx.coroutines.runBlocking
 
 class StampFragment : Fragment() {
 
-    private lateinit var uuid: String
-    private lateinit var viewModel: StampViewModel
     private lateinit var binding: FragmentStampBinding
 
     private val adapter = Moshi.Builder().build().adapter(StateData::class.java)
@@ -40,19 +40,22 @@ class StampFragment : Fragment() {
             }
         }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        uuid =
-            SharedPreferenceUtil.getString(requireActivity(), SharedPreferenceKey.UUID, "")!!
+    private val positionList: MutableList<Boolean> by lazy { getStateList(SharedPreferenceKey.POSITION) }
+    private val quizList: MutableList<Boolean> by lazy { getStateList(SharedPreferenceKey.QUIZ) }
+    private val uuid: String by lazy {
+        SharedPreferenceUtil.getString(requireActivity(), SharedPreferenceKey.UUID, "")!!
+    }
+    private val viewModel: StampViewModel by viewModels {
+        StampViewModel.Factory(positionList, quizList)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val positionList = getStateList(SharedPreferenceKey.POSITION)
-        val quizList = getStateList(SharedPreferenceKey.QUIZ)
+//        positionList = getStateList(SharedPreferenceKey.POSITION)
+//        quizList = getStateList(SharedPreferenceKey.QUIZ)
 
-        viewModel = StampViewModel(positionList, quizList).apply {
+        viewModel.apply {
             observeState(this.judgeInfo, SharedPreferenceKey.POSITION)
             observeState(this.clearInfo, SharedPreferenceKey.QUIZ)
 

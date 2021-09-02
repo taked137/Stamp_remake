@@ -1,20 +1,26 @@
 package com.taked.stamp
 
 import com.taked.stamp.model.api.APIController
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
 
 class APIUnitTest {
-    val name = "banana"
-    val device = "apple"
-    val version = "kiwi"
 
-    val uuid = "uuid"
-    val quiz = 5
-    val beacon = arrayOf(1, 2, 3)
+    companion object {
+        const val name = "banana"
+        const val device = "apple"
+        const val version = "kiwi"
 
-    val answer = "はじっこ"
+        const val uuid = "uuid"
+        const val quiz = 5
+        val beacon = arrayOf(1, 2, 3)
+
+        const val answer = "はじっこ"
+    }
 
     @Test
     fun testRegister() {
@@ -66,4 +72,5 @@ class APIUnitTest {
 
         Assert.assertEquals(true, correctResponse!!.accept)
     }
+
 }

@@ -3,12 +3,18 @@ package com.taked.stamp.view.title.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.lifecycleScope
 import com.taked.stamp.R
 import com.taked.stamp.view.main.ActivityState
-import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
+import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
 import com.taked.stamp.view.main.activity.MainActivity
 import com.taked.stamp.view.title.fragment.TitleFragment
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class TitleActivity : AppCompatActivity() {
 

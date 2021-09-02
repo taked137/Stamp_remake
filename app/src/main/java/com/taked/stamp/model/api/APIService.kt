@@ -27,22 +27,19 @@ interface APIService {
     suspend fun goal(@Header("uuid") uuid: String): GoalResponse
 }
 
-sealed class APIClient {
-    companion object {
-        private const val BASE_URL = "http://13.113.250.233:1323/"
+object APIClient {
+    private const val BASE_URL = "http://13.113.250.233:1323/"
 
-        val instance: APIService by lazy {
-            val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build()
+    val instance: APIService by lazy {
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
-            val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
 
-            retrofit.create(APIService::class.java)
-        }
-
+        retrofit.create(APIService::class.java)
     }
 }

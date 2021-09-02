@@ -3,10 +3,21 @@ package com.taked.stamp.viewmodel.main
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 
 class StampViewModel(
     private val judgeArray: MutableList<Boolean>, private val clearArray: MutableList<Boolean>
 ) : ViewModel() {
+
+    class Factory constructor(
+        private val judgeArray: MutableList<Boolean>, private val clearArray: MutableList<Boolean>
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
+            return StampViewModel(this.judgeArray, this.clearArray) as T
+        }
+    }
+
     companion object {
         const val TEXT_TITLE = "スタンプラリー"
         const val TEXT_BUTTON = "謎解き"

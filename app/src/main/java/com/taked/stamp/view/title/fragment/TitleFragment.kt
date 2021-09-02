@@ -5,14 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.taked.stamp.R
 import com.taked.stamp.databinding.FragmentTitleBinding
 import com.taked.stamp.viewmodel.title.TitleViewModel
 
 class TitleFragment : Fragment() {
 
-    private val viewModel = TitleViewModel()
     private lateinit var binding: FragmentTitleBinding
+    private val viewModel: TitleViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?

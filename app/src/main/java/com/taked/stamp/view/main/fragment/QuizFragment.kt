@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.taked.stamp.databinding.FragmentQuizBinding
@@ -17,24 +18,22 @@ import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.Companion.SharedPreferenceKey
+import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
 
 class QuizFragment(private val quizID: Int) : Fragment() {
 
-    private lateinit var uuid: String
-    private lateinit var viewModel: QuizViewModel
     private lateinit var binding: FragmentQuizBinding
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        uuid =
-            SharedPreferenceUtil.getString(requireActivity(), SharedPreferenceKey.UUID, "")!!
+    private val uuid: String by lazy {
+        SharedPreferenceUtil.getString(requireActivity(), SharedPreferenceKey.UUID, "")!!
+    }
+    private val viewModel: QuizViewModel by viewModels {
+        QuizViewModel.Factory(quizID)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        viewModel = QuizViewModel(quizID)
         binding = FragmentQuizBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
