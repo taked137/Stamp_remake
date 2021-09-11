@@ -73,4 +73,12 @@ class APIUnitTest {
         Assert.assertEquals(true, correctResponse!!.accept)
     }
 
+    @Test
+    fun a() {
+        val a = runBlocking {
+            APIController.test()
+        }
+        println(a.toString())
+    }
+
 }

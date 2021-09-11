@@ -9,18 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import com.taked.stamp.databinding.FragmentInfoBinding
+import com.taked.stamp.databinding.FragmentMapBinding
 import com.taked.stamp.view.main.activity.MainActivity
 import com.taked.stamp.viewmodel.title.RegisterViewModel
 
 class MapFragment : Fragment() {
 
     private val viewModel = RegisterViewModel()
-    private lateinit var binding: FragmentInfoBinding
+    private lateinit var binding: FragmentMapBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentInfoBinding.inflate(inflater, container, false).apply {
+        binding = FragmentMapBinding.inflate(inflater, container, false).apply {
             viewmodel = viewModel
             lifecycleOwner = viewLifecycleOwner
         }

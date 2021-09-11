@@ -4,11 +4,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface APIService {
     @POST("user/create")
@@ -25,6 +21,9 @@ interface APIService {
 
     @POST("user/goal")
     suspend fun goal(@Header("uuid") uuid: String): GoalResponse
+
+    @GET("info")
+    suspend fun info(@Query("limit") limit: Int, @Query("offset") offset: Int): TestResponse
 }
 
 object APIClient {

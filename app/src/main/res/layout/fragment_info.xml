@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,65 +9,37 @@
 
         <variable
             name="viewmodel"
-            type="com.taked.stamp.viewmodel.title.RegisterViewModel" />
+            type="com.taked.stamp.viewmodel.main.InfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.title.fragment.RegisterFragment">
+        tools:context=".view.title.fragment.info.InfoFragment">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/text_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
-            android:paddingTop="45dp">
+            android:padding="15dp"
+            android:text="@{viewmodel.TEXT_TITLE}"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="title" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.titleText}"
-                android:textSize="40sp"
-                tools:text="title" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="32dp">
-
-            <TextView
-                android:id="@+id/warning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.warningText}"
-                android:visibility="@{viewmodel.isTextEnabled ? View.VISIBLE : View.INVISIBLE}"
-                tools:text="warning" />
-
-            <EditText
-                android:id="@+id/inputText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:autofillHints=""
-                android:hint="@{viewmodel.inputText}"
-                android:inputType="text"
-                tools:text="username" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="@{viewmodel.isButtonEnabled}"
-                android:text="@{viewmodel.buttonText}"
-                tools:text="register" />
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

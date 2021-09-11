@@ -55,5 +55,12 @@ sealed class APIController {
             } catch (_: Exception) {
                 null
             }
+
+        suspend fun getInformation(limit: Int, offset: Int): TestResponse? =
+            try {
+                APIClient.instance.info(limit = limit, offset = offset)
+            } catch (_: Exception) {
+                null
+            }
     }
 }
