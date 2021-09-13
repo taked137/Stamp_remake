@@ -4,7 +4,12 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
@@ -78,17 +83,12 @@ class MockAPIService(private val delegate: BehaviorDelegate<APIService>) : APISe
     }
 
     override suspend fun beacon(uuid: String, request: BeaconRequest): BeaconResponse {
-        val response = BeaconResponse(
-            1,
-            2,
-            "https://3.bp.blogspot.com/-xldWJgF1gGk/W8hD-3zNpFI/AAAAAAABPhM/itwOYZLlTNMyN7EKL2yv2-rxzAYoLYASQCLcBGAs/s800/pet_dog_birthday_cake.png"
-        )
+        val response = BeaconResponse(1, 2, "https://hogehoge")
         return delegate.returningResponse(response).beacon(uuid, request)
     }
 
     override suspend fun image(uuid: String, num: Int): ImageResponse {
-        val response =
-            ImageResponse("https://1.bp.blogspot.com/-HoR5t6KAVjg/YLbYUIhzIrI/AAAAAAABdzg/0C2xix-0wdgRGXpxSjril_5L2OyWVvweACNcBGAsYHQ/s868/vaccine_yoyaku_smartphone_no_oldman.png")
+        val response = ImageResponse("https://fugafuga")
         return delegate.returningResponse(response).image(uuid, num)
     }
 

@@ -5,17 +5,12 @@ import android.app.Activity
 import android.content.Context
 import android.os.CountDownTimer
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import com.taked.stamp.databinding.CustomDialogBinding
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.collect
 
 object AlertUtil {
     private lateinit var timer: CountDownTimer
