@@ -7,7 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.taked.stamp.model.api.Message
-import com.taked.stamp.view.main.fragment.info.SamplePagingSource
+import com.taked.stamp.view.main.fragment.info.InfoDataSource
 import kotlinx.coroutines.flow.Flow
 
 class InfoViewModel: ViewModel() {
@@ -18,6 +18,6 @@ class InfoViewModel: ViewModel() {
     val samplePagingFlow: Flow<PagingData<Message>> = Pager(
         PagingConfig(pageSize = 10, initialLoadSize = 10)
     ) {
-        SamplePagingSource(10)
+        InfoDataSource(10)
     }.flow.cachedIn(viewModelScope)
 }

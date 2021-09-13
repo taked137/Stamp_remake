@@ -5,7 +5,7 @@ import androidx.paging.PagingState
 import com.taked.stamp.model.api.APIController
 import com.taked.stamp.model.api.Message
 
-class SamplePagingSource(private val limit: Int) : PagingSource<Int, Message>() {
+class InfoDataSource(private val limit: Int) : PagingSource<Int, Message>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Message> {
         val page = params.key ?: 0
         val response = APIController.getInformation(limit = limit, offset = page)?.result

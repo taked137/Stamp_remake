@@ -99,7 +99,7 @@ class MockAPIService(private val delegate: BehaviorDelegate<APIService>) : APISe
     }
 
     override suspend fun judge(uuid: String, request: AnswerRequest): AnswerResponse {
-        val response = AnswerResponse(1, true)
+        val response = AnswerResponse(1, request.quiz == 5 && request.answer == "はじっこ")
         return delegate.returningResponse(response).judge(uuid, request)
     }
 
