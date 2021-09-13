@@ -43,6 +43,6 @@ data class Message(
     val message: String
 )
 
-data class TestResponse(
+data class InfoResponse(
     val result: List<Message>
 )

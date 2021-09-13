@@ -1,9 +1,6 @@
 package com.taked.stamp
 
-import com.taked.stamp.model.api.APIController
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import com.taked.stamp.model.api.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
@@ -20,65 +17,70 @@ class APIUnitTest {
         val beacon = arrayOf(1, 2, 3)
 
         const val answer = "はじっこ"
+
+        val instance = APIClient.mockInstance()
     }
 
     @Test
-    fun testRegister() {
+    fun register() {
         val response = runBlocking {
-            APIController.registerUser(name, device, version)
+            instance.register(UserRequest(name, device, version))
         }
 
-        Assert.assertNotEquals(response!!.uuid, "")
+        Assert.assertNotEquals(response.uuid, "")
     }
 
     @Test
-    fun testBeacon() {
+    fun beacon() {
         val response = runBlocking {
-            APIController.judgeBeacon(uuid, quiz, beacon.toMutableList())
+            instance.beacon(uuid, BeaconRequest(quiz, beacon.toMutableList()))
         }
 
-        Assert.assertTrue(response!!.url.contains("http"))
+        Assert.assertTrue(response.url.contains("http"))
     }
 
     @Test
-    fun testQuizImage() {
+    fun image() {
         val response = runBlocking {
-            APIController.requestQuiz(uuid, quiz)
+            instance.image(uuid, quiz)
         }
 
-        Assert.assertTrue(response!!.url.contains("http"))
+        Assert.assertTrue(response.url.contains("http"))
     }
 
     @Test
-    fun testJudgeAnswer() {
+    fun judge() {
         val correctResponse = runBlocking {
-            APIController.judgeAnswer(uuid, quiz, answer)
+            instance.judge(uuid, AnswerRequest(quiz, answer))
         }
 
-        Assert.assertEquals(true, correctResponse!!.correct)
+        Assert.assertEquals(true, correctResponse.correct)
 
         val wrongResponse = runBlocking {
-            APIController.judgeAnswer(uuid, quiz, quiz.toString())
+            instance.judge(uuid, AnswerRequest(quiz, quiz.toString()))
         }
 
-        Assert.assertEquals(false, wrongResponse!!.correct)
+        Assert.assertEquals(false, wrongResponse.correct)
     }
 
     @Test
-    fun testGoal() {
-        val correctResponse = runBlocking {
-            APIController.postGoal(uuid)
-        }
-
-        Assert.assertEquals(true, correctResponse!!.accept)
+    fun goalFailure() {
+        val response = runBlocking { instance.goal("") }
+        Assert.assertFalse(response.accept)
     }
 
     @Test
-    fun a() {
-        val a = runBlocking {
-            APIController.test()
+    fun goalSuccess() {
+        val response = runBlocking { instance.goal("goal") }
+        Assert.assertTrue(response.accept)
+    }
+
+    @Test
+    fun info() {
+        val response = runBlocking {
+            instance.info(0, 0)
         }
-        println(a.toString())
+        Assert.assertTrue(response.result.isNotEmpty())
     }
 
 }

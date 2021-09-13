@@ -64,7 +64,6 @@ android {
 
     buildFeatures {
         dataBinding true
-        viewBinding true
     }
 }
 
@@ -90,8 +89,10 @@ dependencies {
     // Testing Navigation
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:retrofit-mock:$retrofit_version"
 
     implementation 'com.squareup.moshi:moshi:1.8.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.8.0'
