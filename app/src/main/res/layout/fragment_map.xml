@@ -1,72 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-
-        <import type="android.view.View" />
-
-        <variable
-            name="viewmodel"
-            type="com.taked.stamp.viewmodel.title.RegisterViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
+    <androidx.fragment.app.FragmentContainerView xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fragment_map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.title.fragment.RegisterFragment">
+        map:cameraZoom="15.0"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintEnd_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        tools:context=".fragment.MapFragment" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:paddingTop="45dp">
-
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.titleText}"
-                android:textSize="40sp"
-                tools:text="title" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="32dp">
-
-            <TextView
-                android:id="@+id/warning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewmodel.warningText}"
-                android:visibility="@{viewmodel.isTextEnabled ? View.VISIBLE : View.INVISIBLE}"
-                tools:text="warning" />
-
-            <EditText
-                android:id="@+id/inputText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginBottom="32dp"
-                android:autofillHints=""
-                android:hint="@{viewmodel.inputText}"
-                android:inputType="text"
-                tools:text="username" />
-
-            <Button
-                android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="@{viewmodel.isButtonEnabled}"
-                android:text="@{viewmodel.buttonText}"
-                tools:text="register" />
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
