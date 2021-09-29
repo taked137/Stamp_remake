@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.taked.stamp.R
 import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.maps.model.CameraPosition
 import com.taked.stamp.viewmodel.util.ToastUtil
 
 
@@ -62,8 +63,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         } else {
             mMap.isMyLocationEnabled = true
         }
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(35.156893, 136.925268)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17f))
     }
 }
