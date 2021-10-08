@@ -33,6 +33,9 @@ interface APIService {
 
     @GET("info")
     suspend fun info(@Query("limit") limit: Int, @Query("offset") offset: Int): InfoResponse
+
+    @GET("map/checkpoint")
+    suspend fun map(): MapResponse
 }
 
 object APIClient {
@@ -106,5 +109,10 @@ class MockAPIService(private val delegate: BehaviorDelegate<APIService>) : APISe
     override suspend fun register(request: UserRequest): UserResponse {
         val response = UserResponse("uuid")
         return delegate.returningResponse(response).register(request)
+    }
+
+    override suspend fun map(): MapResponse {
+        val response = MapResponse(listOf(CheckPoint(1, 1.5, 1.6)))
+        return delegate.returningResponse(response).map()
     }
 }

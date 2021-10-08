@@ -2,15 +2,11 @@ package com.taked.stamp.view.main.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -18,15 +14,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.taked.stamp.R
-import android.view.Gravity
 import androidx.activity.result.contract.ActivityResultContracts
-import com.google.android.gms.maps.model.CameraPosition
+import com.taked.stamp.model.api.APIController
 import com.taked.stamp.viewmodel.util.ToastUtil
+import kotlinx.coroutines.runBlocking
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
     companion object {
-        const val REQUEST_PERMISSION = 1000
+        val NIT = LatLng(35.156893, 136.925268)
     }
 
     private lateinit var mMap: GoogleMap
@@ -55,16 +51,16 @@ class MapFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        if (ContextCompat.checkSelfPermission(
-                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        } else {
-            mMap.isMyLocationEnabled = true
+
+        requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NIT, 17f))
+
+        val checkPoints = runBlocking { APIController.getCheckPoint() }!!
+        checkPoints.checkpoint.forEach {
+            mMap.addMarker(
+                MarkerOptions().position(LatLng(it.latitude, it.longitude))
+                    .title("謎解き${it.num}のチェックポイント")
+            )
         }
-        val sydney = LatLng(35.156893, 136.925268)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 17f))
     }
 }

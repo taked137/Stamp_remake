@@ -46,3 +46,12 @@ data class Message(
 data class InfoResponse(
     val result: List<Message>
 )
+
+data class CheckPoint(
+    val num: Int,
+    val latitude: Double,
+    val longitude: Double
+)
+data class MapResponse(
+    val checkpoint: List<CheckPoint>
+)
