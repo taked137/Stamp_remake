@@ -55,7 +55,7 @@ object APIController {
     suspend fun getCheckPoint(): MapResponse? =
         try {
             APIClient.instance.map()
-        } catch(e: Exception) {
+        } catch(_: Exception) {
             null
         }
 }
