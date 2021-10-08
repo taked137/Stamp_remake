@@ -1,6 +1,6 @@
 package com.taked.stamp.model.api
 
-object APIController {
+object APIRepository {
     suspend fun registerUser(userName: String, device: String, version: String): UserResponse? {
         val request = UserRequest(userName, device, version)
 
@@ -55,7 +55,7 @@ object APIController {
     suspend fun getCheckPoint(): MapResponse? =
         try {
             APIClient.instance.map()
-        } catch(e: Exception) {
+        } catch(_: Exception) {
             null
         }
 }

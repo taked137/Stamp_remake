@@ -15,7 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.taked.stamp.R
 import androidx.activity.result.contract.ActivityResultContracts
-import com.taked.stamp.model.api.APIController
+import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.viewmodel.util.ToastUtil
 import kotlinx.coroutines.runBlocking
 
@@ -55,7 +55,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
         requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NIT, 17f))
 
-        val checkPoints = runBlocking { APIController.getCheckPoint() }!!
+        val checkPoints = runBlocking { APIRepository.getCheckPoint() }!!
         checkPoints.checkpoint.forEach {
             mMap.addMarker(
                 MarkerOptions().position(LatLng(it.latitude, it.longitude))

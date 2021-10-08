@@ -1,7 +1,6 @@
 package com.taked.stamp.view.main.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,11 +12,10 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModelProvider
 import com.squareup.moshi.Moshi
 import com.taked.stamp.databinding.FragmentStampBinding
 import com.taked.stamp.view.main.ActivityState
-import com.taked.stamp.model.api.APIController
+import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.view.main.StateData
 import com.taked.stamp.view.main.activity.QuizActivity
 import com.taked.stamp.viewmodel.util.AlertUtil
@@ -72,7 +70,7 @@ class StampFragment : Fragment() {
 
                 val response =
                     runBlocking {
-                        APIController.judgeBeacon(uuid, quizNum, listOf(1, 2, 3))
+                        APIRepository.judgeBeacon(uuid, quizNum, listOf(1, 2, 3))
                     }
                 if (response == null) {
                     AlertUtil.showNotifyDialog(
@@ -110,7 +108,7 @@ class StampFragment : Fragment() {
         }
 
         val response = runBlocking {
-            APIController.postGoal(uuid)
+            APIRepository.postGoal(uuid)
         }
         if (response!!.accept) {
             AlertUtil.showNotifyDialog(
