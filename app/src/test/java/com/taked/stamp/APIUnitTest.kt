@@ -18,7 +18,7 @@ class APIUnitTest {
 
         const val answer = "はじっこ"
 
-        val instance = APIClient.mockInstance()
+        val instance = APIClient().mockInstance()
     }
 
     @Test
