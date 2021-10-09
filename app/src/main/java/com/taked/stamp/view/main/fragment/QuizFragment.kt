@@ -18,8 +18,14 @@ import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuizFragment(private val quizID: Int) : Fragment() {
+
+    @Inject
+    lateinit var apiRepository: APIRepository
 
     private lateinit var binding: FragmentQuizBinding
 
@@ -43,7 +49,7 @@ class QuizFragment(private val quizID: Int) : Fragment() {
 
             button.setOnClickListener {
                 runBlocking {
-                    APIRepository.judgeAnswer(uuid, quizID, inputText.text.toString())
+                    apiRepository.judgeAnswer(uuid, quizID, inputText.text.toString())
                 }?.let {
                     if (!it.correct) {
                         AlertUtil.showNotifyDialog(requireActivity(), "解答結果", "不正解！もう一度考えてみてください。")
@@ -63,7 +69,7 @@ class QuizFragment(private val quizID: Int) : Fragment() {
             }
 
             lifecycleScope.launch {
-                val response = APIRepository.requestQuiz(uuid, quizID)
+                val response = apiRepository.requestQuiz(uuid, quizID)
                 response?.let {
                     quizImage.load(it.url)
                 }

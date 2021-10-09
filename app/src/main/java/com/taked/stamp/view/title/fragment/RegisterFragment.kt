@@ -16,9 +16,15 @@ import com.taked.stamp.view.main.activity.MainActivity
 import com.taked.stamp.viewmodel.title.RegisterViewModel
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class RegisterFragment : Fragment() {
+
+    @Inject
+    lateinit var apiRepository: APIRepository
 
     private lateinit var binding: FragmentRegisterBinding
     private val viewModel: RegisterViewModel by viewModels()
@@ -67,6 +73,6 @@ class RegisterFragment : Fragment() {
 
     private fun getUUID(name: String, device: String, version: String) =
         runBlocking {
-            APIRepository.registerUser(name, device, version)!!.uuid
+            apiRepository.registerUser(name, device, version)!!.uuid
         }
 }

@@ -21,9 +21,15 @@ import com.taked.stamp.view.main.activity.QuizActivity
 import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.main.StampViewModel
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class StampFragment : Fragment() {
+
+    @Inject
+    lateinit var apiRepository: APIRepository
 
     private lateinit var binding: FragmentStampBinding
 
@@ -70,7 +76,7 @@ class StampFragment : Fragment() {
 
                 val response =
                     runBlocking {
-                        APIRepository.judgeBeacon(uuid, quizNum, listOf(1, 2, 3))
+                        apiRepository.judgeBeacon(uuid, quizNum, listOf(1, 2, 3))
                     }
                 if (response == null) {
                     AlertUtil.showNotifyDialog(
@@ -108,7 +114,7 @@ class StampFragment : Fragment() {
         }
 
         val response = runBlocking {
-            APIRepository.postGoal(uuid)
+            apiRepository.postGoal(uuid)
         }
         if (response!!.accept) {
             AlertUtil.showNotifyDialog(

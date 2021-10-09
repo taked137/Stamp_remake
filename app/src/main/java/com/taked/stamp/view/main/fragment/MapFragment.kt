@@ -11,21 +11,19 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.taked.stamp.R
 import androidx.activity.result.contract.ActivityResultContracts
-import com.taked.stamp.model.api.APIRepository
+import androidx.fragment.app.viewModels
+import com.taked.stamp.databinding.FragmentMapBinding
+import com.taked.stamp.viewmodel.main.MapViewModel
 import com.taked.stamp.viewmodel.util.ToastUtil
-import kotlinx.coroutines.runBlocking
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MapFragment : Fragment(), OnMapReadyCallback {
-    companion object {
-        val NIT = LatLng(35.156893, 136.925268)
-    }
 
     private lateinit var mMap: GoogleMap
+    private lateinit var binding: FragmentMapBinding
+    private val viewModel: MapViewModel by viewModels()
 
     @SuppressLint("MissingPermission")
     private val requestPermission =
@@ -40,27 +38,26 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_map, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.fragment_map) as SupportMapFragment
+        binding = FragmentMapBinding.inflate(inflater, container, false)
+        val mapFragment: SupportMapFragment =
+            childFragmentManager.findFragmentById(binding.fragmentMap.id) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        viewModel.checkPoints.observe(viewLifecycleOwner, { list ->
+            list.forEach { checkPoint ->
+                mMap.addMarker(checkPoint)
+            }
+        })
+
+        return binding.root
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         requestPermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(NIT, 17f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(MapViewModel.NIT, 17f))
 
-        val checkPoints = runBlocking { APIRepository.getCheckPoint() }!!
-        checkPoints.checkpoint.forEach {
-            mMap.addMarker(
-                MarkerOptions().position(LatLng(it.latitude, it.longitude))
-                    .title("謎解き${it.num}のチェックポイント")
-            )
-        }
+        viewModel.updateCheckPoint()
     }
 }

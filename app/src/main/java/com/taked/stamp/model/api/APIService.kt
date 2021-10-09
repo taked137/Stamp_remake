@@ -14,6 +14,8 @@ import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Singleton
 
 interface APIService {
     @POST("user/create")
@@ -38,8 +40,9 @@ interface APIService {
     suspend fun map(): MapResponse
 }
 
-object APIClient {
-    private const val BASE_URL = "http://13.113.250.233:1323/"
+@Singleton
+class APIClient @Inject constructor() {
+    private val BASE_URL = "http://13.113.250.233:1323/"
 
     val instance: APIService by lazy {
         val moshi = Moshi.Builder()
