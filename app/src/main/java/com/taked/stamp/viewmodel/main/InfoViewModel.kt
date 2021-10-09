@@ -8,9 +8,13 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.taked.stamp.model.api.Message
 import com.taked.stamp.view.main.fragment.info.InfoDataSource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class InfoViewModel: ViewModel() {
+@HiltViewModel
+class InfoViewModel @Inject constructor(infoDataSource: InfoDataSource) : ViewModel() {
+
     companion object {
         const val TEXT_TITLE = "インフォメーション"
     }
@@ -18,6 +22,6 @@ class InfoViewModel: ViewModel() {
     val samplePagingFlow: Flow<PagingData<Message>> = Pager(
         PagingConfig(pageSize = 10, initialLoadSize = 10)
     ) {
-        InfoDataSource(10)
+        infoDataSource
     }.flow.cachedIn(viewModelScope)
 }

@@ -1,7 +1,6 @@
 package com.taked.stamp.view.main.fragment
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,15 +11,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.taked.stamp.databinding.FragmentQuizBinding
-import com.taked.stamp.model.api.APIController
+import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.viewmodel.main.QuizViewModel
 import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class QuizFragment(private val quizID: Int) : Fragment() {
+
+    @Inject
+    lateinit var apiRepository: APIRepository
 
     private lateinit var binding: FragmentQuizBinding
 
@@ -44,7 +49,7 @@ class QuizFragment(private val quizID: Int) : Fragment() {
 
             button.setOnClickListener {
                 runBlocking {
-                    APIController.judgeAnswer(uuid, quizID, inputText.text.toString())
+                    apiRepository.judgeAnswer(uuid, quizID, inputText.text.toString())
                 }?.let {
                     if (!it.correct) {
                         AlertUtil.showNotifyDialog(requireActivity(), "解答結果", "不正解！もう一度考えてみてください。")
@@ -64,7 +69,7 @@ class QuizFragment(private val quizID: Int) : Fragment() {
             }
 
             lifecycleScope.launch {
-                val response = APIController.requestQuiz(uuid, quizID)
+                val response = apiRepository.requestQuiz(uuid, quizID)
                 response?.let {
                     quizImage.load(it.url)
                 }

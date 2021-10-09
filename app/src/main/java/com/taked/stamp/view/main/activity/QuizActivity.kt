@@ -8,7 +8,9 @@ import androidx.databinding.DataBindingUtil
 import com.taked.stamp.R
 import com.taked.stamp.databinding.ActivityQuizBinding
 import com.taked.stamp.view.main.fragment.QuizFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class QuizActivity: AppCompatActivity() {
 
     lateinit var binding: ActivityQuizBinding

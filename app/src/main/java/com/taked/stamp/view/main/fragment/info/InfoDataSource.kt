@@ -2,19 +2,27 @@ package com.taked.stamp.view.main.fragment.info
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.taked.stamp.model.api.APIController
+import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.model.api.Message
+import javax.inject.Inject
 
-class InfoDataSource(private val limit: Int) : PagingSource<Int, Message>() {
+class InfoDataSource @Inject constructor(
+    private val apiRepository: APIRepository
+) : PagingSource<Int, Message>() {
+
+    companion object {
+        const val LIMIT = 10
+    }
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Message> {
         val page = params.key ?: 0
-        val response = APIController.getInformation(limit = limit, offset = page)?.result
+        val response = apiRepository.getInformation(limit = LIMIT, offset = page)?.result
 
         return if (response != null) {
             LoadResult.Page(
                 data = response,
-                nextKey = page + limit,
-                prevKey = page - limit
+                nextKey = page + LIMIT,
+                prevKey = page - LIMIT
             )
         } else {
             LoadResult.Page(
