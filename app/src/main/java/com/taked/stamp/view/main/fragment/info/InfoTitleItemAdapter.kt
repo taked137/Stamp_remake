@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.taked.stamp.databinding.InfoItemBinding
 import com.taked.stamp.model.api.Message
 
-class InfoItemAdapter : PagingDataAdapter<Message, InfoItemAdapter.ViewHolder>(diffCallback) {
+class InfoTitleItemAdapter(private val onClickListener: OnClickListener) :
+    PagingDataAdapter<Message, InfoTitleItemAdapter.ViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.infoItem.text = getItem(position)!!.message
+        val message = getItem(position)!!
+        holder.binding.infoItem.text = message.message
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(message)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,6 +25,9 @@ class InfoItemAdapter : PagingDataAdapter<Message, InfoItemAdapter.ViewHolder>(d
     }
 
     class ViewHolder(val binding: InfoItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class OnClickListener(val clickListener: (message: Message) -> Unit) {
+        fun onClick(message: Message) = clickListener(message)
+    }
 
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Message>() {

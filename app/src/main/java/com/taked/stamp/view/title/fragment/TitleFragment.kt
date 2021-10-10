@@ -23,11 +23,9 @@ class TitleFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
 
             button.setOnClickListener {
-                requireActivity().apply {
-                    supportFragmentManager.beginTransaction()
+                requireActivity().supportFragmentManager.beginTransaction()
                         .replace(R.id.container, RegisterFragment())
                         .addToBackStack(null).commit()
-                }
             }
         }
         return binding.root

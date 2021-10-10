@@ -33,8 +33,11 @@ interface APIService {
     @POST("user/goal")
     suspend fun goal(@Header("uuid") uuid: String): GoalResponse
 
-    @GET("info")
-    suspend fun info(@Query("limit") limit: Int, @Query("offset") offset: Int): InfoResponse
+    @GET("info/title")
+    suspend fun infotitle(@Query("limit") limit: Int, @Query("offset") offset: Int): InfoTitleResponse
+
+    @GET("info/content/{num}")
+    suspend fun infocontent(@Path("num") num: Int): InfoContentResponse
 
     @GET("map/checkpoint")
     suspend fun map(): MapResponse
@@ -42,7 +45,9 @@ interface APIService {
 
 @Singleton
 class APIClient @Inject constructor() {
-    private val BASE_URL = "http://13.113.250.233:1323/"
+    companion object {
+        const val BASE_URL = "http://13.113.250.233:1323/"
+    }
 
     val instance: APIService by lazy {
         val moshi = Moshi.Builder()
@@ -98,10 +103,16 @@ class MockAPIService(private val delegate: BehaviorDelegate<APIService>) : APISe
         return delegate.returningResponse(response).image(uuid, num)
     }
 
-    override suspend fun info(limit: Int, offset: Int): InfoResponse {
+    override suspend fun infotitle(limit: Int, offset: Int): InfoTitleResponse {
         val response =
-            InfoResponse(listOf(Message("message01"), Message("message02")))
-        return delegate.returningResponse(response).info(limit, offset)
+            InfoTitleResponse(listOf(Message(1, "message01"), Message(2, "message02")))
+        return delegate.returningResponse(response).infotitle(limit, offset)
+    }
+
+    override suspend fun infocontent(num: Int): InfoContentResponse {
+        val response =
+            InfoContentResponse(1, "title", "category", "message")
+        return delegate.returningResponse(response).infocontent(num)
     }
 
     override suspend fun judge(uuid: String, request: AnswerRequest): AnswerResponse {

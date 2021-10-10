@@ -1,4 +1,4 @@
-package com.taked.stamp.view.main.activity
+package com.taked.stamp.view.quiz.activity
 
 import android.os.Bundle
 import android.view.Menu
@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.taked.stamp.R
 import com.taked.stamp.databinding.ActivityQuizBinding
-import com.taked.stamp.view.main.fragment.QuizFragment
+import com.taked.stamp.view.quiz.fragment.QuizFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

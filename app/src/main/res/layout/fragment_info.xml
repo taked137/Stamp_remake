@@ -9,7 +9,7 @@
 
         <variable
             name="viewmodel"
-            type="com.taked.stamp.viewmodel.main.InfoViewModel" />
+            type="com.taked.stamp.viewmodel.main.InfoTitleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

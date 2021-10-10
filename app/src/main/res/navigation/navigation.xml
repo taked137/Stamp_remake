@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/info"
-        android:name="com.taked.stamp.view.main.fragment.info.InfoFragment"
+        android:name="com.taked.stamp.view.main.fragment.info.InfoTitleFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_info" />
 

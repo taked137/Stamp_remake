@@ -36,7 +36,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.main.activity.QuizActivity"
+            android:name=".view.quiz.activity.QuizActivity"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.info.InfoActivity"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

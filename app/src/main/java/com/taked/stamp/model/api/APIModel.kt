@@ -40,11 +40,19 @@ data class GoalResponse(
 )
 
 data class Message(
+    val id: Int,
     val message: String
 )
 
-data class InfoResponse(
+data class InfoTitleResponse(
     val result: List<Message>
+)
+
+data class InfoContentResponse(
+    val id: Int,
+    val title: String,
+    val category: String,
+    val message: String
 )
 
 data class CheckPoint(

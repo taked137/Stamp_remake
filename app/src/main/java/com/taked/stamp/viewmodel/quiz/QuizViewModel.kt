@@ -1,4 +1,4 @@
-package com.taked.stamp.viewmodel.main
+package com.taked.stamp.viewmodel.quiz
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
