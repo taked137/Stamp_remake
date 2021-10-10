@@ -3,6 +3,7 @@ package com.taked.stamp.view.title.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatDelegate
 import com.taked.stamp.R
 import com.taked.stamp.view.main.ActivityState
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil.SharedPreferenceKey
@@ -24,6 +25,8 @@ class TitleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         if (getState() != ActivityState.REGISTER) {
             val intent = Intent(this, MainActivity::class.java)

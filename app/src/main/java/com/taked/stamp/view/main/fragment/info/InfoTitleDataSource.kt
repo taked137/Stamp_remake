@@ -6,7 +6,7 @@ import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.model.api.Message
 import javax.inject.Inject
 
-class InfoDataSource @Inject constructor(
+class InfoTitleDataSource @Inject constructor(
     private val apiRepository: APIRepository
 ) : PagingSource<Int, Message>() {
 

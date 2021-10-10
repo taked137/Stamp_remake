@@ -1,4 +1,4 @@
-package com.taked.stamp.view.main.fragment
+package com.taked.stamp.view.quiz.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.taked.stamp.databinding.FragmentQuizBinding
 import com.taked.stamp.model.api.APIRepository
-import com.taked.stamp.viewmodel.main.QuizViewModel
+import com.taked.stamp.viewmodel.quiz.QuizViewModel
 import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
 import kotlinx.coroutines.launch

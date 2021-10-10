@@ -17,7 +17,7 @@ import com.taked.stamp.databinding.FragmentStampBinding
 import com.taked.stamp.view.main.ActivityState
 import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.view.main.StateData
-import com.taked.stamp.view.main.activity.QuizActivity
+import com.taked.stamp.view.quiz.activity.QuizActivity
 import com.taked.stamp.viewmodel.util.AlertUtil
 import com.taked.stamp.viewmodel.main.StampViewModel
 import com.taked.stamp.viewmodel.util.SharedPreferenceUtil
@@ -56,8 +56,6 @@ class StampFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-//        positionList = getStateList(SharedPreferenceKey.POSITION)
-//        quizList = getStateList(SharedPreferenceKey.QUIZ)
 
         viewModel.apply {
             observeState(this.judgeInfo, SharedPreferenceKey.POSITION)

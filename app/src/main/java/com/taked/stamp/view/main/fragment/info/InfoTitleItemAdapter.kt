@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.taked.stamp.databinding.InfoItemBinding
 import com.taked.stamp.model.api.Message
 
-class InfoItemAdapter(private val onClickListener: OnClickListener) :
-    PagingDataAdapter<Message, InfoItemAdapter.ViewHolder>(diffCallback) {
+class InfoTitleItemAdapter(private val onClickListener: OnClickListener) :
+    PagingDataAdapter<Message, InfoTitleItemAdapter.ViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val message = getItem(position)!!
