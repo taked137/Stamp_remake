@@ -21,3 +21,4 @@
 - Coroutine
 - Jetpack Compose
 - Maps SDK for Android
+- Dagger Hilt
