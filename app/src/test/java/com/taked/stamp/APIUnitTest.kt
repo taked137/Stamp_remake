@@ -78,7 +78,7 @@ class APIUnitTest {
     @Test
     fun info() {
         val response = runBlocking {
-            instance.info(0, 0)
+            instance.infotitle(0, 0)
         }
         Assert.assertTrue(response.result.isNotEmpty())
     }
