@@ -16,7 +16,7 @@ class InfoDataSource @Inject constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Message> {
         val page = params.key ?: 0
-        val response = apiRepository.getInformation(limit = LIMIT, offset = page)?.result
+        val response = apiRepository.getInformationTitle(limit = LIMIT, offset = page)?.result
 
         return if (response != null) {
             LoadResult.Page(

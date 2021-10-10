@@ -50,9 +50,16 @@ class APIRepository @Inject constructor(private val apiClient: APIClient) {
             null
         }
 
-    suspend fun getInformation(limit: Int, offset: Int): InfoResponse? =
+    suspend fun getInformationTitle(limit: Int, offset: Int): InfoTitleResponse? =
         try {
-            apiClient.instance.info(limit = limit, offset = offset)
+            apiClient.instance.infotitle(limit = limit, offset = offset)
+        } catch (_: Exception) {
+            null
+        }
+
+    suspend fun getInformationContent(num: Int): InfoContentResponse? =
+        try {
+            apiClient.instance.infocontent(num)
         } catch (_: Exception) {
             null
         }

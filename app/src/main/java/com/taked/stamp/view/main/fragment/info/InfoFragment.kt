@@ -8,16 +8,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.taked.stamp.databinding.FragmentInfoBinding
+import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.viewmodel.main.InfoViewModel
+import com.taked.stamp.viewmodel.util.ToastUtil
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class InfoFragment : Fragment() {
 
     private lateinit var binding: FragmentInfoBinding
     private val viewModel: InfoViewModel by viewModels()
+
+    @Inject
+    lateinit var apiRepository: APIRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -26,7 +33,12 @@ class InfoFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        val adapter = InfoItemAdapter()
+        val adapter = InfoItemAdapter(InfoItemAdapter.OnClickListener {
+            val response = runBlocking {
+                apiRepository.getInformationContent(it.id)
+            }
+            ToastUtil.makeBottomToast(requireContext(), response.toString())
+        })
         binding.recyclerView.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
