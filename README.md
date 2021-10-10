@@ -19,3 +19,5 @@
 - Retrofit2
 - Moshi
 - Coroutine
+- Jetpack Compose
+- Maps SDK for Android
