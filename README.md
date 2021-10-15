@@ -15,6 +15,7 @@
 - RecyclerView
 - AAC-MVVM
 - LiveData
+- DataBinding
 - Coil
 - Retrofit2
 - Moshi
