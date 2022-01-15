@@ -31,7 +31,7 @@ class InfoActivity : AppCompatActivity() {
         val response = runBlocking { apiRepository.getInformationContent(infoID) }!!
 
         setContent {
-            MainScreen(
+            InfoScreen(
                 title = response.title,
                 category = "[${response.category}]",
                 message = if (response.message.isNotEmpty()) response.message else "本文無し"
@@ -39,9 +39,8 @@ class InfoActivity : AppCompatActivity() {
         }
     }
 
-
     @Composable
-    fun MainScreen(title: String, category: String, message: String) {
+    fun InfoScreen(title: String, category: String, message: String) {
         MaterialTheme {
             Scaffold(topBar = {
                 TopAppBar(
@@ -70,10 +69,10 @@ class InfoActivity : AppCompatActivity() {
 
     @Preview
     @Composable
-    fun MainScreenPreView() {
+    fun InfoScreenPreView() {
         val title = "title"
         val category = "category"
         val message = "message"
-        MainScreen(title = title, category = category, message = message)
+        InfoScreen(title = title, category = category, message = message)
     }
 }

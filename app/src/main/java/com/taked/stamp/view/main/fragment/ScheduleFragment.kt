@@ -3,12 +3,11 @@ package com.taked.stamp.view.main.fragment
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
-import com.taked.stamp.databinding.FragmentInfoBinding
+import androidx.fragment.app.Fragment
 import com.taked.stamp.databinding.FragmentScheduleBinding
 import com.taked.stamp.view.main.activity.MainActivity
 import com.taked.stamp.viewmodel.title.RegisterViewModel
