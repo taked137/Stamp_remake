@@ -67,7 +67,21 @@ class APIRepository @Inject constructor(private val apiClient: APIClient) {
     suspend fun getCheckPoint(): MapResponse? =
         try {
             apiClient.instance.map()
-        } catch(_: Exception) {
+        } catch (_: Exception) {
+            null
+        }
+
+    suspend fun getEventTitles(): EventResponse? =
+        try {
+            apiClient.instance.event()
+        } catch (_: Exception) {
+            null
+        }
+
+    suspend fun getTimeTable(limit: Int, offset: Int): ScheduleResponse? =
+        try {
+            apiClient.instance.schedule(limit, offset)
+        } catch (_: Exception) {
             null
         }
 }

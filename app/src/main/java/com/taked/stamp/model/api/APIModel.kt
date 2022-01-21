@@ -63,3 +63,15 @@ data class CheckPoint(
 data class MapResponse(
     val checkpoint: List<CheckPoint>
 )
+
+data class EventResponse(
+    val events: List<String>
+)
+
+data class TimeEvent(
+    val time: Int,
+    val events: Map<String, String>
+)
+data class ScheduleResponse(
+    val result: List<TimeEvent>
+)

@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/schedule"
-        android:name="com.taked.stamp.view.main.fragment.ScheduleFragment"
+        android:name="com.taked.stamp.view.main.fragment.schedule.ScheduleFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_schedule" />
 

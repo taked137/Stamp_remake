@@ -34,13 +34,25 @@ interface APIService {
     suspend fun goal(@Header("uuid") uuid: String): GoalResponse
 
     @GET("info/title")
-    suspend fun infotitle(@Query("limit") limit: Int, @Query("offset") offset: Int): InfoTitleResponse
+    suspend fun infotitle(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): InfoTitleResponse
 
     @GET("info/content/{num}")
     suspend fun infocontent(@Path("num") num: Int): InfoContentResponse
 
     @GET("map/checkpoint")
     suspend fun map(): MapResponse
+
+    @GET("event")
+    suspend fun event(): EventResponse
+
+    @GET("event/schedule")
+    suspend fun schedule(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int
+    ): ScheduleResponse
 }
 
 @Singleton
@@ -128,5 +140,15 @@ class MockAPIService(private val delegate: BehaviorDelegate<APIService>) : APISe
     override suspend fun map(): MapResponse {
         val response = MapResponse(listOf(CheckPoint(1, 1.5, 1.6)))
         return delegate.returningResponse(response).map()
+    }
+
+    override suspend fun event(): EventResponse {
+        val response = EventResponse(listOf("屋台１", "屋台２"))
+        return delegate.returningResponse(response).event()
+    }
+
+    override suspend fun schedule(limit: Int, offset: Int): ScheduleResponse {
+        val response = ScheduleResponse(listOf(TimeEvent(1, mapOf("屋台" to "hello"))))
+        return delegate.returningResponse(response).schedule(limit, offset)
     }
 }
