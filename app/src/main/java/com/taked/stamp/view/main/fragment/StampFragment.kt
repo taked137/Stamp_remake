@@ -61,13 +61,13 @@ class StampFragment : Fragment() {
             observeState(this.judgeInfo, SharedPreferenceKey.POSITION)
             observeState(this.clearInfo, SharedPreferenceKey.QUIZ)
 
-            quizLiveData.observe(viewLifecycleOwner, { quizNum ->
+            quizLiveData.observe(viewLifecycleOwner) { quizNum ->
                 val intent = Intent(requireActivity(), QuizActivity::class.java).apply {
                     putExtra("quizID", quizNum)
                 }
                 startForResult.launch(intent)
-            })
-            imageLiveData.observe(viewLifecycleOwner, { quizNum ->
+            }
+            imageLiveData.observe(viewLifecycleOwner) { quizNum ->
                 if (!AlertUtil.showProgressDialog(requireContext(), "ビーコン取得中...", container)) {
                     return@observe
                 }
@@ -84,12 +84,12 @@ class StampFragment : Fragment() {
                 }
 
                 showBeaconAlert(response.id, quizNum)
-            })
-            goalLiveData.observe(viewLifecycleOwner, {
+            }
+            goalLiveData.observe(viewLifecycleOwner) {
                 val progress =
                     SharedPreferenceUtil.getInt(requireActivity(), SharedPreferenceKey.PROGRESS, -1)
                 showGoalAlert(progress)
-            })
+            }
         }
 
         binding = FragmentStampBinding.inflate(inflater, container, false).apply {
@@ -128,7 +128,7 @@ class StampFragment : Fragment() {
     private fun observeState(
         array: LiveData<List<Boolean>>, sharedPreferenceKey: SharedPreferenceKey
     ) {
-        array.observe(viewLifecycleOwner, {
+        array.observe(viewLifecycleOwner) {
             val clearArray = MutableList(6) { false }
             for ((count, bool) in array.value!!.withIndex()) {
                 clearArray[count] = bool
@@ -137,7 +137,7 @@ class StampFragment : Fragment() {
             SharedPreferenceUtil.putString(
                 requireActivity(), sharedPreferenceKey, adapter.toJson(StateData(clearArray))
             )
-        })
+        }
     }
 
     private fun getStateList(sharedPreferenceKey: SharedPreferenceKey) =
