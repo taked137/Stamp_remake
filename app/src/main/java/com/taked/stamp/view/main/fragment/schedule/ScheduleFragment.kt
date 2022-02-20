@@ -6,10 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -30,7 +34,6 @@ import com.taked.stamp.model.api.APIRepository
 import com.taked.stamp.viewmodel.main.ScheduleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
-import java.time.LocalTime
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -76,11 +79,7 @@ class ScheduleFragment : Fragment() {
 
     @Composable
     fun InfoScreen(eventTitles: List<String>) {
-        val localTime = LocalTime.now()
         val verticalScrollState = rememberScrollState()
-//        val horizontalScrollState = rememberLazyListState(localTime.hour)
-        val horizontalScrollState = rememberLazyListState()
-
         val lazyPagingItems = viewModel.pagingFlow.collectAsLazyPagingItems()
 
         MaterialTheme {

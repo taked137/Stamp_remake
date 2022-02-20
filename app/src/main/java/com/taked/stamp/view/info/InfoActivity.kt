@@ -5,7 +5,13 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.IconButton
+import androidx.compose.material.Icon
+import androidx.compose.material.Divider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -34,7 +40,7 @@ class InfoActivity : AppCompatActivity() {
             InfoScreen(
                 title = response.title,
                 category = "[${response.category}]",
-                message = if (response.message.isNotEmpty()) response.message else "本文無し"
+                message = response.message.ifEmpty { "本文無し" }
             )
         }
     }
